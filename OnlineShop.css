@@ -1,6 +1,56 @@
-h1{
-    text-align: center;
-    font-size: large;
+p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 25px;
     color: solid black;
+    padding: 1% 20% 1% 20%;
 
+}
+
+.table1 {
+    padding: 3% 1% 0% 1%;
+
+}
+
+.table2 {
+    padding: 0% 5% 3% 5%;
+    width: 60%;
+    text-align:right;
+}
+
+.button1 {
+    background-color: black;
+    color: white;
+    padding: 13px 32px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button2 {
+    background-color: white;
+    color: black;
+    padding: 13px 32px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: 3px solid black;
+    font-weight: bold;
+}
+
+.fa-star {
+    color: orange;
+    text-align: left;
+    font-size:25px;
+}
+
+.fa-heart {
+    color: #DCDCDC;
+    text-align: right;
+    font-size:25px;
+}
+
+.fa-heart:hover {
+    color: red;
+    
 }
