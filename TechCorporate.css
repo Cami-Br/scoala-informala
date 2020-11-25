@@ -156,7 +156,7 @@ button{
     background-color:rgb(68, 68, 68);
     box-sizing: border-box;
     border-style: ridge;
-    width: 130px;
+    width: 128px;
     height:70px;
     display:flex;
     justify-content: center;
@@ -166,7 +166,7 @@ button{
 }
 .footerBar{
     display:flex;
-    max-width:730px;
+    max-width:720px;
     flex-direction:row;
     flex-wrap: wrap;
     margin:auto;
