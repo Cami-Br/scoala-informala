@@ -156,17 +156,15 @@
         /** 11. O functie "maxArray" care primeste un array si returneaza valoarea maxima 
         (ar trebui sa functioneze si pentru numere si pentru stringuri). */
         function maxArray(arr) {
-
-            let len = arr.length;
-            let max = -Infinity;
-            while (len--) {
-                if (arr[len] > max) {
-                    max = arr[len];
+            let maxim = arr[0];
+            for (let i = 1; i < arr.length; ++i) {
+                if (arr[i] > maxim) {
+                    maxim = arr[i];
                 }
             }
-            return max;
-        };
-        console.log("maxArray([7,9,0,87,97])", maxArray([7,9,0,87,97]));
+            return maxim;
+        }
+        console.log("maxArray([7,9,0,87,97])", maxArray([7, 9, 0, 87, 97]));
 
         /** 12. O functie "sumMinMax" care primeste un array de numere si returneaza
          suma dintre valoare maxima si valoare minima*/
