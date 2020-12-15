@@ -6,7 +6,6 @@
     <script>
         /** 1. O functie "equals" care primeste 2 parametrii si returneaza daca cei 2 
         parametrii sunt egali, strict. */
-
         function equals(a, b) {
             if (a === b) {
                 return true;
@@ -15,12 +14,12 @@
                 return false;
             }
         };
-        console.log("equals(6,8)", equals(6, 8));
+        console.log("equals(6, 8)", equals(6, 8));
+        console.log(" equals(5, 5)", equals(5, 5));
 
         /** 2. O functie "compare" care primeste 2 parametrii si returneaza -1 daca primul
          e mai mic ca al doilea, 0 daca sunt egale si 1 daca primul e mai mare ca al 
          doilea. */
-
         function compare(a, b) {
             if (a < b) {
                 return -1;
@@ -62,10 +61,9 @@
             let i = 1;
             let sum = 0;
             while (i <= a, i++) {
-                sum = [a * (a + 1)] / 2;
+                sum = (a * (a + 1)) / 2;
                 return sum;
             }
-
         };
         console.log("suma(9)", suma(9));
 
@@ -111,14 +109,10 @@
         /** 8. O functie "invers" care primeste un parametru de tip numar si intoarce 
         inversul acestuia (ca numar) (123 => 321). */
         function invers(x) {
-            let i = 0;
             let y = 0;
             while (x > 0) {
                 y = y * 10 + x % 10;
                 x = Math.floor(x / 10);
-
-                i++;
-
             }
             return y;
         };
@@ -169,19 +163,17 @@
         /** 12. O functie "sumMinMax" care primeste un array de numere si returneaza
          suma dintre valoare maxima si valoare minima*/
         function sumMinMax(arr) {
-            let len = arr.length;
-            let max = -Infinity;
-            let min = Infinity;
-            let sum = 0;
-            while (len--) {
-                if (arr[len] > max) {
-                    max = arr[len];
+            let maxim = arr[0];
+            let min = arr[0];
+            for (let i = 0; i < arr.length; ++i) {
+                if (arr[i] > maxim) {
+                    maxim = arr[i];
                 }
-                if (arr[len] < min) {
-                    min = arr[len];
+                if (arr[i] < min) {
+                    min = arr[i];
                 }
-            } sum = min + max;
-            return sum;
+            }
+            return maxim + min;
         }
         console.log("sumMinMax([5,7,8,4])", sumMinMax([5, 7, 8, 4]));
 
@@ -201,7 +193,6 @@
 
         /** 14. O functie "produsPozitive" care primeste un array si returneaza produsul
          numerelor pozitive intr-un array primit ca parametru. */
-
         function produsPozitive(arr) {
             let prod = 1;
             let i = 0;
@@ -226,7 +217,8 @@
             }
             return true;
         }
-        console.log(palindrom(["Anna"]));
+        console.log("palindrom([Anna])", palindrom(["Anna"]));
+        console.log("palindrom(7890)", palindrom("7890"));
 
     </script>
 </head>
