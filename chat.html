@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        #chatMessages {
+            flex: 1;
+            overflow: auto;
+            background-image: url("https://wallpaperaccess.com/full/1288076.jpg");
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        #chatbox {
+            height: 75px;
+            display: flex;
+        }
+        #chatbox>textarea {
+            height: 100%;
+            flex: 1;
+            box-sizing: border-box;
+        }
+        #chatbox>button {
+            width: 100px;
+            font-size: 1.2em;
+        }
+        .message {
+            padding: 5px;
+            border: 1px solid darkgray;
+            border-radius: 10px;
+            background-color: white;
+            margin: 5px;
+        }
+    </style>
+    <script>
+        let messages = [
+            "Ana are mere",
+            "Ana are pere",
+            "Ana are portocale",
+            "Ana are biscuiti"
+        ];
+        function draw() {
+            let user = "Sistem";
+            let str = ""
+            for (let i = messages.length - 1; i >= 0; i--){
+                str += ` <div class="message">
+                <div class="user">${user}</div>
+                <div class="content"> ${messages[i]}</div>
+            </div> `
+                let chatMessages = document.querySelector("#chatMessages");
+                chatMessages.innerHTML = str;
+            }
+        }
+
+        function addMessage() {
+            let textarea = document.querySelector("#chatbox>textarea");
+            let val = textarea.value.trim();
+            messages.push(val);
+            draw();
+            textarea.value = "";
+        }
+    </script>
+</head>
+<body onload="draw();">
+    <div id="chatMessages">
+    </div>
+    <div id="chatbox">
+        <textarea></textarea>
+        <button onclick="addMessage();">Save</button>
+    </div>
+</body>
+
+</html>
