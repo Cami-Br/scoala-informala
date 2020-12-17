@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Validator </title>
+	<style>
+		.mandatory {
+			color: red;
+		}
+
+		.invalid {
+			background-color: pink;
+			border-color: red;
+			border-radius: 5px;
+		}
+		.valid{
+			background-color: rgb(193, 230, 193);
+			border-color:darkgreen;
+			border-radius: 5px;
+		}
+		.errorMessage{
+			background-color: pink;
+			display: none;
+		}
+		.invalid + .errorMessage{
+			display:block;
+		}
+	</style>
+	
+	<script>
+		// intodeauna se pune in oglinda, ce este valid in if nu este valid in elese si envers
+		function minMaxLength(elem, event, minLength, maxLength) {
+			let value = elem.value;
+			if (value.length < minLength || value.length > maxLength) {
+				elem.classList.add("invalid");
+				elem.classList.remove("valid");
+			} else {
+				elem.classList.remove("invalid");
+				elem.classList.add("valid");
+			}
+		}
+		function clearInvalid(elem){
+				elem.classList.remove("valid");
+				elem.classList.remove("invalid");
+		}
+		// userul nu poate introduce mai multe caractere decat punem limita
+		function onKey(elem, event){
+			if(elem.value.length >= 10 || (event.key >= "0" && event.key <= "9")){
+				event.preventDefault();
+			}
+
+		}
+	</script>
+</head>
+
+<body>
+	<form>
+		<label>
+			<span>Nume<span class="mandatory">*</span></span>
+			<input type="text" name="nume" onkeypress="onKey(this, event)"  onfocus ="clearInvalid(this, event);" onblur="minMaxLength(this, event, 3, 10);" />
+			<div class="errorMessage">Numele trebuie sa contina cel putin 3 caractere.</div>
+		</label>
+		<br/>
+		
+		<label>
+			<span>Prenume<span class="mandatory">*</span></span>
+			<input type="text" name="prenume" onfocus ="clearInvalid(this, event);" onblur="minMaxLength(this, event, 3, 10);" />
+			<div class="errorMessage">Numele trebuie sa contina cel putin 3 caractere.</div>
+		</label>
+		<br/>
+		<label>
+			<span>Adresa<span class="mandatory">*</span></span>
+			<textarea type="text" name="adresa" onfocus ="clearInvalid(this, event);" onblur="minMaxLength(this, event, 10, 100);"></textarea>
+			<div class="errorMessage">Numele trebuie sa contina cel putin 3 caractere.</div>
+		</label>
+	</form>
+</body>
+
+</html>
