@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Accordion</title>
+    <style>
+        body {
+            width: 100%;
+        }
+
+        .buttonAccordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            height: 50px;
+            width: 50%;
+        }
+
+        .active,
+        .buttonAccordion:hover {
+            background-color: #ccc;
+        }
+
+        .contentAccordion {
+            width: 50%;
+            display: none;
+        }
+
+        .contentAccordion.active {
+            display: block;
+            justify-content: center;
+            background-color: white;
+            color: black;
+
+        }
+    </style>
+    <script>
+        function changeTab(idx) {
+            let oldActiveButton = document.querySelector(".buttonAccordion.active");
+            oldActiveButton.classList.remove("active");
+
+            let buttons = document.querySelectorAll(".tab")
+            let button = buttons[idx];
+            button.classList.add("active");
+
+            let oldPage = document.querySelector(".contentAccordion.active");
+            oldPage.classList.remove("active");
+
+            let pages = document.querySelectorAll(".contentAccordion")
+            let page = pages[idx];
+            page.classList.add("active");
+        }
+    </script>
+</head>
+
+<body>
+    <button class="buttonAccordion tab " onclick="changeTab(0);">Nike</button>
+    <div class="contentAccordion">
+        <p> Nike, is an American multinational corporation that is engaged in the design,
+            development, manufacturing, and worldwide marketing and sales of footwear, apparel,
+            equipment, accessories, and services. The company is headquartered near Beaverton,
+            Oregon, in the Portland metropolitan area. It is the world's largest supplier of
+            athletic shoes and apparel and a major manufacturer of sports equipment, with
+            revenue in excess of US$37.4 billion in its fiscal year 2020 (ending May 31, 2020).
+            As of 2020, it employed 76,700 people worldwide. In 2020 the brand alone was
+            valued in excess of $32 billion, making it the most valuable brand among sports
+            businesses.Previously in 2017, the Nike brand was valued at $29.6 billion.
+            Nike ranked No. 89 in the 2018 Fortune 500 list of the largest United States
+            corporations by total revenue.
+            The company was founded on January 25, 1964, as "Blue Ribbon Sports",
+            by Bill Bowerman and Phil Knight, and officially became Nike, Inc. on May 30,
+            971. The company takes its name from Nike, the Greek goddess of victory.
+            Nike markets its products under its own brand, as well as Nike Golf, Nike Pro,
+            Nike+, Air Jordan, Nike Blazers, Air Force 1, Nike Dunk, Air Max, Foamposite,
+            Nike Skateboarding, Nike CR7,and subsidiaries including Jordan Brand
+            and Converse. Nike also owned Bauer Hockey (later renamed Nike Bauer) from
+            1995 to 2008, and previously owned Cole Haan, Umbro, and Hurley
+            International. In addition to manufacturing sportswear and equipment,
+            the company operates retail stores under the Niketown name. Nike sponsors
+            many high-profile athletes and sports teams around the world, with the
+            highly recognized trademarks of "Just Do It" and the Swoosh logo.
+        </p>
+    </div>
+    <button class="buttonAccordion tab active" onclick="changeTab(1);">Adidas</button>
+    <div class="contentAccordion active">
+        <p>
+            Adidas stylized as adidas since 1949) is a German multinational corporation,
+            founded and headquartered in Herzogenaurach, Germany, that designs and
+            manufactures shoes, clothing and accessories. It is the largest sportswear
+            manufacturer in Europe, and the second largest in the world, after Nike.
+            the holding company for the Adidas Group, which consists of the Reebok
+            sportswear company, 8.33% of the German football club Bayern München,
+            and Runtastic, an Austrian fitness technology company. Adidas' revenue for
+            2018 was listed at €21.915 billion.
+            The company was started by Adolf Dassler in his mother's house; he was
+            joined by his elder brother Rudolf in 1924 under the name Gebrüder Dassler
+            Schuhfabrik ("Dassler Brothers Shoe Factory"). Dassler assisted in the
+            development of spiked running shoes (spikes) for multiple athletic events.
+            To enhance the quality of spiked athletic footwear, he transitioned from a
+            previous model of heavy metal spikes to utilising canvas and rubber.
+            Dassler persuaded U.S. sprinter Jesse Owens to use his handmade spikes at
+            the 1936 Summer Olympics. In 1949, following a breakdown in the
+            relationship between the brothers, Adolf created Adidas, and Rudolf
+            established Puma, which became Adidas' business rival.
+            The three stripes are Adidas' identity mark, having being used on the
+            company's clothing and shoe designs as a marketing aid. The branding,
+            which Adidas bought in 1952 from Finnish sports company Karhu Sports for
+            the equivalent of 1,600 euros and two bottles of whiskey, became so
+            successful that Dassler described Adidas as "The three stripes company".
+        </p>
+    </div>
+    <button class="buttonAccordion tab" onclick="changeTab(2);">Puma</button>
+    <div class="contentAccordion">
+        <p>Puma SE, branded as Puma, is a German multinational corporation that designs and
+            manufactures athletic and casual footwear, apparel and accessories, which is
+            headquartered in Herzogenaurach, Bavaria, Germany. Puma is the third largest
+            sportswear manufacturer in the world. The company was founded in 1948 by Rudolf
+            Dassler. In 1924, Rudolf and his brother Adolf "Adi" Dassler had jointly formed the
+            company Gebrüder Dassler Schuhfabrik (Dassler Brothers Shoe Factory). The
+            relationship between the two brothers deteriorated until the two agreed to split
+            in 1948, forming two separate entities, Adidas and Puma. Both companies are
+            currently based in Herzogenaurach, Germany.
+            Puma has been a public company since 1986, listed on the Frankfurt Stock
+            Exchange. French luxury group Kering (formerly known as
+            Pinault-Printemps-Redoute or PPR) holds 16%, Kering's largest shareholder
+            Artemis SA owns 29% of the share capital. Since 1 July 2013, the company
+            has been led by former football professional Bjørn Gulden (CEO).
+            As of 2017, Puma SE employs more than 13,000 people worldwide and distributes
+            its products in more than 120 countries.
+            Following the split from his brother, Rudolf originally registered the newly
+            established company as Ruda (derived from Rudolf Dassler, as Adidas was based
+            on Adi Dassler), but later changed the name to Puma. Puma's earliest logo
+            consisted of a square and beast jumping through a D, which was registered,
+            along with the company's name, in 1948. Puma's shoe and clothing designs
+            feature the Puma logo and the distinctive "Formstrip" which was introduced
+            in 1958.
+        </p>
+    </div>
+    <button class="buttonAccordion tab" onclick="changeTab(3);">Under Armour</button>
+    <div class="contentAccordion">
+        <p>
+            Under Armour, Inc. is an American sports equipment company that manufactures
+            footwear, sports and casual apparel.Under Armour's global headquarters are
+            located in Baltimore, Maryland with additional offices located in Amsterdam
+            (European headquarters), Austin, Guangzhou, Hong Kong, Houston, Jakarta, London,
+            Mexico City, Munich, New York City, Panama City (international headquarters),
+            Paris, Pittsburgh, Portland, San Francisco, São Paulo, Santiago, Seoul, Shanghai
+            (Greater Chinese headquarters), and Toronto.
+        </p>
+    </div>
+</body>
+
+</html>
