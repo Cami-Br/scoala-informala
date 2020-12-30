@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD</title>
+    <style>
+        .delete,
+        .edit {
+            width: 35px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        table,
+        td,
+        th {
+            border: 2px solid black;
+        }
+    </style>
+    <script>
+        // CRUD = Create, Read, Update, Delete;
+        let inregistrari = [
+            {
+                "link": "https//...",
+                "parola": "blabla",
+                "data": "2020-12-15"
+            },
+            {
+                "link": "https//...",
+                "parola": "yey",
+                "data": "2020-12-18"
+            },
+            {
+                "link": "https//...",
+                "parola": "yey",
+                "data": "2020-12-18"
+            },
+            {
+                "link": "https//...",
+                "parola": "yey",
+                "data": "2020-12-18"
+            }
+        ];
+        let indexEditare = -1;
+        function draw() {
+            let str = "";
+            for (let i = 0; i < inregistrari.length; i++) {
+                str +=
+                    `<tr>
+                    <td>${inregistrari[i].data}</td>
+                    <td><a href="${inregistrari[i].link}"_blank">Link</a></td>
+                    <td>${inregistrari[i].parola}</td>
+                    <td>
+                        <img class="delete" src="DeleteDustbin-512.png" onclick="del(${i});"/>
+                        <img class="edit" src="Edit_icon_(the_Noun_Project_30184).svg.png" onclick="edit(${i});"/>
+                    </td>
+                </tr>`;
+            }
+            document.querySelector("#zoom tbody").innerHTML = str;
+        }
+        /** 
+         * Preia informatiile din array si le populeaza in formular.
+        */
+        function edit(idx) {
+            let inregistrare = inregistrari[idx];
+            document.querySelector("[name='link']").value = inregistrare.link;
+            document.querySelector("[name='parola']").value = inregistrare.parola;
+            document.querySelector("[name='data']").value = inregistrare.data;
+            indexEditare = idx;
+            document.querySelector("#editBtn").classList.remove("hidden");
+            document.querySelector("#cancelBtn").classList.remove("hidden");
+            document.querySelector("#addBtn").classList.add("hidden");
+            showForm();
+        }
+        /**
+         * Preia informatiile din formular si le actualizeaza in array;
+        */
+        function editPasul2() {
+            if (indexEditare === -1) {
+                return;
+            }
+            let inregistrare = inregistrari[indexEditare];
+            inregistrare.link = document.querySelector("[name='link']").value;
+            inregistrare.parola = document.querySelector("[name='parola']").value;
+            inregistrare.data = document.querySelector("[name='data']").value;
+            draw();
+            cancel();
+        }
+        function cancel() {
+            indexEditare = -1;
+            document.querySelector("#editBtn").classList.add("hidden");
+            document.querySelector("#addBtn").classList.remove("hidden");
+            //dupa modificarile facute, resetam formularul, dupa onclik formularul se goleste.
+            document.querySelector("form").reset();
+            // o alta varianta in care resetam formularul.
+
+            //document.querySelector("[name='link']").value="";
+            //document.querySelector("[name='parola']").value="";
+            //document.querySelector("[name='data']").value="";
+            hideForm();
+        }
+        function del(idx) {
+            if (confirm(`Esti sigur ca vrei sa stergi inregistrarea din data de ${inregistrari[idx].data} ?`)) {
+                inregistrari.splice(idx, 1);
+                draw();
+            }
+        }
+        function adauga() {
+            let link = document.querySelector("[name='link']").value;
+            let parola = document.querySelector("[name='parola']").value;
+            let data = document.querySelector("[name='data']").value;
+            inregistrari.push({
+                "link": link,
+                "parola": parola,
+                "data": data
+            });
+            draw();
+            hideForm();
+        }
+        function hideForm() {
+            document.querySelector("form").classList.add("hidden");
+            document.querySelector("#zoom").classList.remove("hidden");
+            document.querySelector("#plusBtn").classList.remove("hidden");
+        }
+        function showForm() {
+            document.querySelector("form").classList.remove("hidden");
+            document.querySelector("#zoom").classList.add("hidden");
+            document.querySelector("#plusBtn").classList.add("hidden");
+        }
+    </script>
+</head>
+
+<body onload="draw();">
+    <form onsubmit="event.preventDefault(); adauga();" class="hidden">
+        <label>
+            Link: <input type="text" name="link" />
+        </label>
+        <br />
+        <label>
+            Parola: <input type="password" name="parola" />
+        </label>
+        <br />
+        <label>
+            Data: <input type="date" name="data" />
+        </label>
+        <br />
+        <input id="addBtn" type="submit" value="Adauga" />
+        <input id="editBtn" type="button" onclick="editPasul2();" class="hidden" value="Editeaza" />
+        <input id="cancelBtn" type="button" onclick="cancel();" value="Cancel" />
+    </form>
+    <input id="plusBtn" type="button" value="+" onclick="showForm();" />
+    <table id="zoom" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Link</th>
+                <th>Parola</th>
+                <th>Delete/Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
