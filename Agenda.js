@@ -43,7 +43,7 @@ function modificaPasul2() {
     contact.telefon = document.querySelector("[name='telefon']").value;
     draw();
     document.querySelector("form").reset();
-
+    indexEditare= -1;
 }
 function sterge(idx) {
     if (confirm(`Esti sigur ca vrei sa stergi contactul ${contacte[idx].nume} ?`)) {
@@ -51,8 +51,11 @@ function sterge(idx) {
         draw();
     }
 }
-function telInput() {
-    if (event.Keycode === 13) {
-        adauga();
+
+function telInput(elem, event) {
+    if (event.keyCode === 13) {
+        return modificaPasul2();
     }
 }
+
+

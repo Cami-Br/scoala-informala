@@ -9,16 +9,16 @@
 
 <body onload="draw();">
     <h1>Agenda</h1>
-    <form onsubmit="event.preventDefault(); modificaPasul2(); ">
+    <form>
         <label>
             Nume :
             <input type="text" name="nume" />
         </label>
         <label>
             Telefon :
-            <input type="text" name="telefon" onkeypresss="telInput();" />
+            <input type="text" name="telefon" onkeypress="telInput(this, event)" />
         </label>
-        <input class="contactBtn" type="submit" value="ADAUGA CONTACT" name="contact" />
+        <input class="contactBtn" type="button" value="ADAUGA CONTACT" name="contact" onclick="modificaPasul2();" />
     </form>
     <table class="agenda hidden">
         <thead>
