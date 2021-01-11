@@ -1,0 +1,49 @@
+html {
+    background-image: url('i6nfs0fxxc2sgjeuhbtzruu9s3tvloxmyycisnnlvz22hogtqtjbn8gajszim4tv-.jpg');
+    background-size:cover;
+    }
+
+body {
+    width: 50%;
+    background-color: rgba(255, 255, 255, .6);    
+    font-family: 'Permanent Marker', sans-serif;
+    margin: auto;
+}
+
+.container {
+    display: block;
+    text-align: center;
+}
+
+input {
+    background-color:  rgba(255, 255, 255, .6);
+    font-size: 25px;
+    font-family: 'Permanent Marker', sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+table {
+    margin: auto;
+    font-size: 25px;
+ 
+}
+
+.markedItem{
+    text-decoration: line-through;
+}
+
+.sortBtn {
+    margin-top: 10px;
+    background-color:rgba(255, 255, 255, .6);
+}
+
+.addBtn {
+    background-color:rgba(255, 255, 255, .6);
+}
+
+#markBtn {
+    background-color: rgb(238, 133, 125);
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ShoppingList</title>
+    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker:400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="ShoppingList.css" />
+</head>
+
+<body>
+    <form onsubmit="event.preventDefault();">
+        <div class="container">
+            <h1>Shopping list</h1>
+            <input type="text" name="item" />
+            <input class="addBtn" type="submit" value="Add Item" onclick="adauga();" />
+            <br />
+            <input class="sortBtn " type="button" value="Sort asc" onclick="sortAsc();">
+            <input class="sortBtn" type="button" value="Sort desc" onclick="sortDesc();">
+        </div>
+    </form>
+
+    <table class="list">
+        <thead>
+            <tr class="cell hidden">
+                <th>Item Description</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script src="./ShoppingList.js"></script>
+</body>
+
+
+</html>
