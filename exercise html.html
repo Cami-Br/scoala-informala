@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercises</title>
+    <script>
+        let arr = ["asda", "asdasd"];
+        function draw() {
+            let str = "";
+            for (let i = 0; i <arr.length ; i++) {
+                str += ` 
+                <li>${arr[i]}</li>
+                    `
+            }
+            let ul = document.querySelector("ul");
+            ul.innerHTML = str;
+        }
+        function add(){
+            let input= document.querySelector("input");
+            let val= input.value;
+            if(val !== ""){
+            arr.push(val);
+            draw();
+            input.value="";
+        }
+        }
+
+        function sum(){
+            let prim = document.querySelector("#nr1");
+            let value1= prim.value;
+            let second = document.querySelector("#nr2");
+            let value2 = second.value;
+            
+            let p = document.querySelector("p");
+            p.innerHTML=` 
+            Rezultatul operatiei de adunare ${value1} + ${value2}=${Number(value1) + Number(value2)}
+            `;
+        }
+       
+    </script>
+
+<body onload ="draw();">
+    <input type="text">
+    <button onclick="add();">Adauga</button>
+    <ul >
+    </ul>
+
+    <input type="text" id="nr1"/>
+    <input type="text" id="nr2"/>
+    <button onclick="sum();">Aduna</button>
+    <p></p>
+    
+</body>
+
+</html>

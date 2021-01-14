@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>For & other loops JS</title>
+    <!--<script src="for.js"></script>-->
+    <script>
+        //apoi codul de aici (nr pare).
+        var array = [3, 6, 7, 8, 1, 2, 4, 99, 8, 6, 4, 3, 2, 6];
+        for (let i = 1; i < array.length; i++) {
+            if (array[i] % 2 === 0) {
+                console.log(array[i]);
+            }
+        }
+        // a ** b power.
+        function pow(a, b) {
+            var p = 1;
+            for (let i = 0; i < b; i++) {
+                p *= a;
+            }
+            return p;
+        }
+        console.log("pow(2, 3)", pow(2, 3));
+        console.log("pow(5, 5)", pow(5, 5));
+
+        // tabla inmultirii.
+        function tablainmultirii(x) {
+            for (let i = 1; i <= 10; i++) {
+                console.log(x + "x" + i + "=" + (x * i));
+
+            }
+        }
+        tablainmultirii(8);
+
+        // expunere nr in piramida.
+
+        function triunghi(n) {
+            for (let i = 1; i <= n; i++) {
+                var str = "";
+                for (let j = 0; j < i; j++) {
+                    str += i;
+                }
+                console.log(str);
+            }
+        }
+
+        triunghi(9);
+
+        // fobonacci.
+        function fibonacci(n) {
+            if (n === 1 || n === 2) {
+                return 1;
+            }
+            let a = 1;
+            let b = 1;
+            let c = 1;
+            for (let i = 2; i < n; i++) {
+                a = b;
+                b = c;
+                c = a + b;
+            }
+            return c;
+        }
+        console.log(fibonacci(9));
+        // distanta mai mica fata de un punct.
+
+        function distantamica(a, b, x) {
+            let difA = x - a;
+            let difB = x - b;
+            if (difA < 0) {
+                difA *= -1;
+            }
+            if (difB < 0) {
+                difB *= -1;
+            }
+            if (difA < difB) {
+                return a;
+            }
+            else {
+                return b;
+            }
+
+        }
+        console.log("distantamica(4, 7, 9)", distantamica(4, 7, 9));
+
+        // nume complet , concatenarea stringurilor.
+        function numeComplet(nume, initiala, prenume, numeNastere) {
+            if (nume === numeNastere) {
+                return nume + " " + initiala[0] + ". " + prenume;
+            }
+            else {
+                return nume + " " + initiala[0] + ". " + prenume + " (" + numeNastere + ")";
+            }
+        }
+        console.log(numeComplet("Popescu", "Ioan", "Ionut", "Popescu"));
+        console.log(numeComplet("Baraian", "Nicolae", "Camelia", "Horhat"));
+
+
+
+        function fizzBuzz(n) {
+            var str = "";
+            for (let i = 1; i <= n; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    str += "fizzbuzz";
+                }
+                else if (i % 3 === 0) {
+                    str += "fizz";
+                }
+                else if (i % 5 === 0) {
+                    str += "buzz";
+                }
+                else {
+                    str += i;
+                }
+                if (i !== n) {
+                    str += ", ";
+                }
+            }
+            return str;
+        }
+        console.log(fizzBuzz(15));
+
+
+        function bolt(n) {
+            var directie = "dreapta";
+            var persoana = 1;
+            var str = "";
+            for (let i = 1; i <= n; i++) {
+                if (i % 7 === 0 || div7(i) === true) {
+                    str += "P" + persoana + ":" + "BOLT" + "\n";
+                    if (directie === "dreapta") {
+                        directie = "stanga";
+                    } else {
+                        directie = "dreapta";
+                    }
+                } else {
+                    str += "P" + persoana + ":" + i + "\n";
+                }
+                
+                    if (directie === "dreapta") {
+                        persoana++;
+                        if (persoana > 5) {
+                            persoana = 1;
+                        }
+                    } else {
+                        persoana--;
+                        if (persoana < 1) {
+                            persoana = 5;
+                        }
+                    }
+            }
+            return str;
+        }
+
+        function div7(x) {
+            while (x > 0) {
+                if ((x % 10) === 7) {
+                    return true;
+                }
+                x = Math.floor(x / 10);
+            }
+            return false;
+        };
+        console.log(bolt(100));
+
+
+        
+        //https://github.com/bogdan-nourescu-scoalainformala/scoala-informala
+
+        function sort(str){
+            let result = [];
+            for (let i = 0; i < str.length; i++) {
+                if(str[i] % 2 === 0) {
+                    result.push(str[i]);
+                }
+            }
+            return result;
+        };
+        console.log("sort([1, 7, 98, 0, 79, 4]", sort([1, 7, 98, 0, 79, 4]));
+
+       // https://medium.com/@jmartinez729/full-crud-with-javascript-1c3fb77f81f
+
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

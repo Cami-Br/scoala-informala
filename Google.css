@@ -1,0 +1,68 @@
+.left {
+    display: inline;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+    font: 13px/27px Roboto, RobotoDraft, Arial, sans-serif;
+    float: right;
+    padding: 10px 10px;
+
+}
+
+a:hover {
+    color: gray;
+    text-decoration: underline;
+}
+.firstimg {
+  float:right;
+  padding: 10px 10px;
+}
+.firstimg:hover{
+    background-color: #A9A9A9;
+    border-radius: 30px;
+}
+
+.googleimg{
+    display:flex;
+    justify-content:center;
+    padding: 140px 0px 5px 30px;
+}
+.titleicons{
+    -webkit-tap-highlight-color: transparent;
+    align-items: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: var(--tile-size);
+    margin-bottom: var(--tile-margin);
+    opacity: 1;
+    outline: none;
+    padding-top: var(--tile-margin);
+    position: relative;
+    text-decoration: none;
+    transition-duration: 300ms;
+    transition-property: left, top;
+    transition-timing-function: ease-in-out;
+    user-select: none;
+    width: var(--tile-size);
+    padding: 17px;
+    position: relative; right:3%; top:7px;
+    text-decoration: none;
+    color:black
+   
+}
+#butoane{
+    display:flex;
+    justify-content:center;
+    font-family: Roboto, 'Segoe UI', Tahoma, sans-serif;
+    font-size: 81.25%;
+
+}
+.titleicons:hover{
+    background-color:rgba(241, 243, 244, 1) ;
+    text-decoration: none;
+}
