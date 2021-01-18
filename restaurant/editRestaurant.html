@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Restaurant</title>
+    <style>
+        html {
+            background-image: linear-gradient(to left, rgba(124, 173, 169, 0), rgb(148, 189, 192), rgb(95, 131, 139));
+            background-size: cover;
+        }
+
+        body {
+            width: 70%;
+            background-color: rgba(255, 255, 255, .6);
+            margin: auto;
+        }
+
+        .formRestaurant {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            font-size: 30px;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin-left: 15px;
+        }
+
+        input {
+            font-size: 25px;
+        }
+
+        button {
+            font-size: 20px;
+            width: 120px;
+            margin-left: 30px;
+            margin-bottom: 30px;
+        }
+
+        #loading {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .lds-default div {
+            background: rgb(58, 56, 56);
+        }
+    </style>
+    <script>
+        let preparat={};
+        let url = "https://restaurantul-meu-49822-default-rtdb.europe-west1.firebasedatabase.app/";
+        let index = window.location.search.substr(4);
+        if (index.length < 1) {
+            window.location = "adminRestaurant.html";
+        }
+        
+        async function getLista() {
+            const response = await fetch(url + index + ".json");
+            preparat = await response.json();
+            draw();
+        }
+        function draw(){
+            document.querySelector("[name='nume']").value = preparat.nume;
+            document.querySelector("[name='poze']").value = preparat.poze[0];
+            document.querySelector("[name='timpPreparare']").value = preparat.timpPreparare;
+            let ingrediente = preparat.ingrediente;
+                let strIngrediente = "";
+                for (let j = 0; j < ingrediente.length; j++) {
+                    strIngrediente += `${ingrediente[j].valoare} ${ingrediente[j].um}  ${ingrediente[j].numeIngredient}, `
+                }
+            document.querySelector("[name='ingrediente']").value = preparat.ingrediente;
+            document.querySelector("[name='preparare']").value = preparat.preparare;
+        }
+         async function salveaza(event) {
+            event.preventDefault();
+            let nume = document.querySelector("[name='nume']").value;
+            let poze = document.querySelector("[name='poze']").value;
+            let timpPreparare = document.querySelector("[name='timpPreparare']").value;
+            let ingrediente = document.querySelector("[name='ingrediente']").value;
+            let preparare = document.querySelector("[name='preparare']").value;
+
+            let preparatNou = {
+                "nume": nume,
+                "poze": [poze],
+                "timpPreparare": Number(timpPreparare),
+                "ingrediente": [{
+                    "numeIngredient": ingrediente,
+                    "valoare": 0,
+                    "um": ""
+                }],
+                "preparare": preparare
+
+            };
+            const response = await fetch(url +index + ".json", {
+                method: "put",
+                body: JSON.stringify(preparatNou),
+                headers: {
+                    'Content-Type': 'aplication/json'
+                }
+            });
+            preparat = await response.json();
+            window.location = "adminRestaurant.html";
+
+        }
+
+    </script>
+</head>
+
+<body onload="getLista();">
+
+    <header>
+        <h1>Cald si bun (Admin)</h1>
+    </header>
+    <form class="formRestaurant" onsubmit="salveaza(event);">
+        <label>
+            Nume: <input type="text" name="nume" />
+        </label>
+        <br />
+        <label>
+            URL Imagine: <input type="text" name="poze" />
+        </label>
+        <br />
+        <label>
+            Timp de preparare: <input type="number" name="timpPreparare" />
+        </label>
+        <br />
+        <label>
+            Ingrediente: <textarea name="ingrediente"></textarea>
+        </label>
+        <br />
+        <label>
+            Mod de preparare: <textarea name="preparare"></textarea>
+        </label>
+        <br />
+        <button type="submit">Adauga preparat</button>
+
+    </form>
+
+</body>
+
+</html>
