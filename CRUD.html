@@ -8,9 +8,11 @@
         .edit {
             width: 35px;
         }
+
         .hidden {
             display: none !important;
         }
+
         table,
         td,
         th {
@@ -19,45 +21,35 @@
     </style>
     <script>
         // CRUD = Create, Read, Update, Delete;
-        let inregistrari = [
-            {
-                "link": "https//...",
-                "parola": "blabla",
-                "data": "2020-12-15"
-            },
-            {
-                "link": "https//...",
-                "parola": "yey",
-                "data": "2020-12-18"
-            },
-            {
-                "link": "https//...",
-                "parola": "yey",
-                "data": "2020-12-18"
-            },
-            {
-                "link": "https//...",
-                "parola": "yey",
-                "data": "2020-12-18"
-            }
-        ];
+        let url = "https://crud-956c2.europe-west1.firebasedatabase.app/CamiBaraian/"
+        let inregistrari = {};
         let indexEditare = -1;
-        function draw() {
-            let str = "";
-            for (let i = 0; i < inregistrari.length; i++) {
-                str +=
-                    `<tr>
-                    <td>${inregistrari[i].data}</td>
-                    <td><a href="${inregistrari[i].link}"_blank">Link</a></td>
-                    <td>${inregistrari[i].parola}</td>
-                    <td>
-                        <img class="delete" src="DeleteDustbin-512.png" onclick="del(${i});"/>
-                        <img class="edit" src="Edit_icon_(the_Noun_Project_30184).svg.png" onclick="edit(${i});"/>
-                    </td>
-                </tr>`;
-            }
-            document.querySelector("#zoom tbody").innerHTML = str;
+
+        async function getInregistrari() {
+			const response = await fetch(url+".json");
+			inregistrari = await response.json();
+			if(inregistrari===null){
+				inregistrari = {};
+			}
+			draw();
         }
+        function draw(){
+			let str = "";
+			for(let [id, inregistrare] of Object.entries(inregistrari)){
+				str+=`
+					<tr>
+						<td>${inregistrare.data}</td>
+						<td><a href="${inregistrare.link}" target="_blank">Link</a></td>
+						<td>${inregistrare.parola}</td>
+						<td>
+							<img class="delete" src="DeleteDustbin-512.png" onclick="del('${id}');" />
+							<img class="edit" src="Edit_icon_(the_Noun_Project_30184).svg.png" onclick="edit('${id}');" />
+						</td>
+					</tr>
+				`
+			}
+			document.querySelector("#zoom tbody").innerHTML=str;
+		}
         /** 
          * Preia informatiile din array si le populeaza in formular.
         */
@@ -68,24 +60,34 @@
             document.querySelector("[name='data']").value = inregistrare.data;
             indexEditare = idx;
             document.querySelector("#editBtn").classList.remove("hidden");
-            document.querySelector("#cancelBtn").classList.remove("hidden");
             document.querySelector("#addBtn").classList.add("hidden");
             showForm();
         }
         /**
          * Preia informatiile din formular si le actualizeaza in array;
         */
-        function editPasul2() {
-            if (indexEditare === -1) {
-                return;
-            }
-            let inregistrare = inregistrari[indexEditare];
-            inregistrare.link = document.querySelector("[name='link']").value;
-            inregistrare.parola = document.querySelector("[name='parola']").value;
-            inregistrare.data = document.querySelector("[name='data']").value;
-            draw();
-            cancel();
-        }
+        async function editPasul2(){
+			if(indexEditare===-1){
+				return;
+			}
+			let inregistrare = {};
+			inregistrare.link = document.querySelector("[name='link']").value;
+			inregistrare.parola = document.querySelector("[name='parola']").value;
+			inregistrare.data = document.querySelector("[name='data']").value;
+			
+			const response = await fetch(url+indexEditare+".json", {
+				method:"put",
+				body: JSON.stringify(inregistrare),
+			    headers: {
+				  'Content-Type': 'application/json'
+				},
+			});
+			await response.json();
+			
+			await getInregistrari();
+			
+			cancel();
+		}
         function cancel() {
             indexEditare = -1;
             document.querySelector("#editBtn").classList.add("hidden");
@@ -99,24 +101,40 @@
             //document.querySelector("[name='data']").value="";
             hideForm();
         }
-        function del(idx) {
-            if (confirm(`Esti sigur ca vrei sa stergi inregistrarea din data de ${inregistrari[idx].data} ?`)) {
-                inregistrari.splice(idx, 1);
-                draw();
-            }
-        }
-        function adauga() {
-            let link = document.querySelector("[name='link']").value;
-            let parola = document.querySelector("[name='parola']").value;
-            let data = document.querySelector("[name='data']").value;
-            inregistrari.push({
-                "link": link,
-                "parola": parola,
-                "data": data
-            });
-            draw();
-            hideForm();
-        }
+        async function del(idx){
+			if(confirm(`Esti sigur ca vrei sa stergi inregistrarea de la data de ${inregistrari[idx].data} ?`)){
+				const response = await fetch(url+idx+".json", {
+					method:"delete"
+				});
+				await response.json();
+				
+				await getInregistrari();
+			}
+			
+		}
+        async function adauga(){
+			let link = document.querySelector("[name='link']").value;
+			let parola = document.querySelector("[name='parola']").value;
+			let data = document.querySelector("[name='data']").value;
+			
+			
+			const response = await fetch(url+".json", {
+				method:"post",
+				body: JSON.stringify({
+					"link": link,
+					"parola": parola,
+					"data": data
+				}),
+			    headers: {
+				  'Content-Type': 'application/json'
+				},
+			});
+			await response.json();
+			
+			await getInregistrari();
+			hideForm();
+		}
+
         function hideForm() {
             document.querySelector("form").classList.add("hidden");
             document.querySelector("#zoom").classList.remove("hidden");
@@ -130,7 +148,7 @@
     </script>
 </head>
 
-<body onload="draw();">
+<body onload="getInregistrari();">
     <form onsubmit="event.preventDefault(); adauga();" class="hidden">
         <label>
             Link: <input type="text" name="link" />
@@ -157,7 +175,7 @@
                 <th>Parola</th>
                 <th>Delete/Edit</th>
             </tr>
-        </thead>     
+        </thead>
         <tbody>
         </tbody>
     </table>
