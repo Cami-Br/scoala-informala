@@ -1,11 +1,11 @@
 let url = "https://agenda-358d7-default-rtdb.europe-west1.firebasedatabase.app/"
-let contacte = [];
+let contacte = {};
 let indexEditare = -1;
 
 async function getContacte() {
     contacte = await ajax(url);
     if (contacte === null) {
-        contacte = [];
+        contacte = {};
     }
     draw();
 }
@@ -23,16 +23,16 @@ async function ajax(url, method, body) {
 }
 function draw() {
     let str = "";
-    for (let i = 0; i < contacte.length; i++) {
+    for (let [id, contact] of Object.entries(contacte)){
         str +=
             `<tr>
-            <td>${contacte[i].nume}</td>
-            <td>${contacte[i].telefon}</td>
+            <td>${contact.nume}</td>
+            <td>${contact.telefon}</td>
             <td>
-                <button class="modificare" onclick="modifica(${i});">Modifica</button>
+                <button class="modificare" onclick="modifica(${id});">Modifica</button>
             </td>
             <td>
-                <button class="sterge" onclick="sterge(${i})">Sterge</button>
+                <button class="sterge" onclick="sterge(${id})">Sterge</button>
             </td>
         </tr>`;
     }
@@ -49,7 +49,7 @@ async function adauga() {
         "telefon": telefon
         
         }),
-    await getInregistrari();
+    await getContacte();
   
     document.querySelector("form").reset();
 }
@@ -72,7 +72,7 @@ async function modificaPasul2() {
             
         }
     );
-    await getInregistrari();
+    await getContacte();
     document.querySelector("form").reset();
     indexEditare= -1;
 }
