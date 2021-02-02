@@ -77,7 +77,7 @@ button {
     background-color: rgb(187, 224, 224);
 }
 
-.forecast {
+.alldays {
     display: flex;
     flex-direction: row;
     justify-content: space-around;

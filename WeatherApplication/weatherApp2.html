@@ -9,7 +9,7 @@
 
 <body>
     <div class="afiseazaPrognoza">
-        <input type="text" id="cityName" placeholder="Enter location...">
+        <input type="text" id="cityName" placeholder="Enter location..." onblur="hideForecast();">
         <button id="button1" onclick="weatherNow();">Show weather</button>
         <button id="button2" onclick="forecastWeather();">Show forecast</button>
     </div>
@@ -57,12 +57,14 @@
             <hr>
         </div>
         <div class="forecast hidden">
-            <div class="days"></div>
-            <div class="days"></div>
-            <div class="days"></div>
-            <div class="days"></div>
-            <div class="days"></div>
-            <div class="days"></div>
+            <div class="alldays">
+                <div class="days"></div>
+                <div class="days"></div>
+                <div class="days"></div>
+                <div class="days"></div>
+                <div class="days"></div>
+                <div class="days"></div>
+            </div>
         </div>
     </div>
     <script src="./weatherApp2.js"></script>

@@ -27,7 +27,7 @@ async function weatherNow() {
     document.querySelector("#vremea5").innerText = json.main.temp_min;
     document.querySelector("#vremea6").innerText = json.main.temp_max;
     document.querySelector(".mapouter").classList.remove("hidden");
-
+  
 }
 async function forecastWeather() {
     let cityName = document.querySelector("#cityName").value;
@@ -64,4 +64,7 @@ async function forecastWeather() {
             }
         }
     }
+}
+function hideForecast(){
+    document.querySelector(".forecast").classList.add("hidden");
 }
