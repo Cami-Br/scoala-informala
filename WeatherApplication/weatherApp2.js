@@ -8,9 +8,9 @@ let urlForecast = {
 };
 let urlWeather = {
     key: "c532c26c8d4eeba0066fe7d5ad23fccb",
-    base: "http://api.openweathermap.org/data/2.5/weather?"
+    base: "https://api.openweathermap.org/data/2.5/weather?"
 };
-let iconUrl = "http://openweathermap.org/img/wn/";
+let iconUrl = "https://openweathermap.org/img/wn/";
 
 async function weatherNow() {
     
