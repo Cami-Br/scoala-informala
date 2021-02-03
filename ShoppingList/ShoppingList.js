@@ -1,24 +1,5 @@
-let url = "https://shoppingli-f72f4-default-rtdb.europe-west1.firebasedatabase.app/"
 let obiecteAdaugate = [];
-
-async function getObiecteAdaugate() {
-    obiecteAdaugate = await ajax(url);
-    if (obiecteAdaugate === null) {
-        obiecteAdaugate = [];
-    }
-    draw();
-}
-async function ajax(url, method, body) {
-    let response = await fetch(url + ".json", {
-        method: method,
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    return await response.json();
-}
-async function draw() {
+function draw() {
     let str = "";
     let str2 = "";
     for (let i = 0; i < obiecteAdaugate.length; i++) {
@@ -28,7 +9,7 @@ async function draw() {
                    <td><input class="markBtn" type="button" name="buyedItem" value="Mark as buyed" onclick="markAsBuyed('${i}');"></td>
              </tr>`
         }
-        else {
+       else{
             str += `<tr>
                 <td class="onList">${obiecteAdaugate[i].item}</td>
                 <td><input class="markBtn" type="button" name="buyedItem" value="Mark as buyed" onclick="markAsBuyed(${i});"></td>
@@ -37,17 +18,16 @@ async function draw() {
         document.querySelector(".list tbody").innerHTML = str2 + str;
     }
 }
+
 async function adauga() {
     let item = document.querySelector("[name='item']").value;
-    await ajax(
-        url + obiecteAdaugate.length,
-        "PUT",
-        {
-            "item": item
-        });
+    if (item.length !== 0 ){
+        obiecteAdaugate.push({
+            item: item
+        })
+    }
 
     document.querySelector(".cell").classList.remove("hidden");
-    await getObiecteAdaugate();
     document.querySelector("form").reset();
     draw();
 
