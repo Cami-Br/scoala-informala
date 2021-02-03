@@ -26,7 +26,6 @@ async function adauga() {
             item: item
         })
     }
-
     document.querySelector(".cell").classList.remove("hidden");
     document.querySelector("form").reset();
     draw();
