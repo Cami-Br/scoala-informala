@@ -10,7 +10,7 @@ async function getContacte() {
     draw();
 }
 async function ajax(url, method, body) {
-  
+
     let response = await fetch(url + ".json", {
         method: method,
         body: JSON.stringify(body),
@@ -23,40 +23,40 @@ async function ajax(url, method, body) {
 }
 function draw() {
     let str = "";
-    for (let [id, contact] of Object.entries(contacte)){
+    for (let [i, contact] of Object.entries(contacte)) {
         str +=
             `<tr>
             <td>${contact.nume}</td>
             <td>${contact.telefon}</td>
             <td>
-                <button class="modificare" onclick="modifica(${id});">Modifica</button>
+                <button class="modificare" onclick="modifica('${i}');">Modifica</button>
             </td>
             <td>
-                <button class="sterge" onclick="sterge(${id})">Sterge</button>
+                <button class="sterge" onclick="sterge('${i}')">Sterge</button>
             </td>
         </tr>`;
     }
     document.querySelector(".agenda tbody").innerHTML = str;
 }
 async function adauga() {
-    let nume = document.querySelector("[name='nume']").value;
-    let telefon = document.querySelector("[name='telefon']").value;
+    let nume = document.querySelector("#numele").value;
+    let telefon = document.querySelector("#telefonul").value;
     await ajax(
-        url + contacte.length, 
-        "PUT", 
+        url + contacte.length,
+        "PUT",
         {
-        "nume": nume,
-        "telefon": telefon
-        
+            "nume": nume,
+            "telefon": telefon
+
         }),
-    await getContacte();
-  
+       await getContacte();
+
     document.querySelector("form").reset();
 }
 function modifica(idx) {
     let contact = contacte[idx];
-    document.querySelector("[name='nume']").value = contact.nume;
-    document.querySelector("[name='telefon']").value = contact.telefon;
+    document.querySelector("#numele").value = contact.nume;
+    document.querySelector("#telefonul").value = contact.telefon;
     indexEditare = idx;
 }
 async function modificaPasul2() {
@@ -67,16 +67,20 @@ async function modificaPasul2() {
         url + indexEditare,
         "PUT",
         {
-            "nume": document.querySelector("[name='nume']").value,
-            "telefon": document.querySelector("[name='telefon']").value,
-            
+            "nume": document.querySelector("#numele").value,
+            "telefon": document.querySelector("#telefonul").value,
+
         }
     );
     await getContacte();
     document.querySelector("form").reset();
-    indexEditare= -1;
+    cancel();
 }
- async function sterge(idx) {
+function cancel(){
+    indexEditare = -1;
+    document.querySelector("form").reset();
+} 
+async function sterge(idx) {
     if (confirm(`Esti sigur ca vrei sa stergi contactul ${contacte[idx].nume} ?`)) {
         await ajax(url + idx, "DELETE");
         await getContacte();
