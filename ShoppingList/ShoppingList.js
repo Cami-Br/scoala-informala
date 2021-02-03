@@ -1,4 +1,5 @@
 let obiecteAdaugate = [];
+
 function draw() {
     let str = "";
     let str2 = "";
@@ -8,8 +9,7 @@ function draw() {
                   <td  class="markedItem">${obiecteAdaugate[i].item}</td>
                    <td><input class="markBtn" type="button" name="buyedItem" value="Mark as buyed" onclick="markAsBuyed('${i}');"></td>
              </tr>`
-        }
-       else{
+        }else {
             str += `<tr>
                 <td class="onList">${obiecteAdaugate[i].item}</td>
                 <td><input class="markBtn" type="button" name="buyedItem" value="Mark as buyed" onclick="markAsBuyed(${i});"></td>
@@ -19,9 +19,9 @@ function draw() {
     }
 }
 
-async function adauga() {
+function adauga() {
     let item = document.querySelector("[name='item']").value;
-    if (item.length !== 0 ){
+    if (item.length !== 0) {
         obiecteAdaugate.push({
             item: item
         })
