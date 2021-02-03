@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sterge Restaurant</title>
+    <style>
+        html {
+            background-color: rgb(95, 131, 139);
+        }
+
+        body {
+            width: 80%;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, .6);
+            padding: 30px;
+            font-size: 35px;
+            margin-top: 10%;
+        }
+
+        #slideshow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        p {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            height: 50px;
+            width: 100px;
+            text-align: center;
+            font-size: 30px;
+            margin-left: 6px;
+            margin-right: 6px;
+        }
+    </style>
+    <script>
+        let preparat = {};
+        let url = "https://restaurantul-meu-49822-default-rtdb.europe-west1.firebasedatabase.app/";
+        var index = window.location.search.substr(4);
+        if (index.length < 1) {
+            window.location = "adminRestaurant.html";
+        }
+
+
+        async function getLista() {
+            const response = await fetch(url + index + ".json");
+            preparat = await response.json();
+            draw();
+        }
+
+        function draw() {
+            document.querySelector("#nume").innerText = preparat.nume;
+        }
+        async function sterge() {
+            const response = await fetch(url + index + ".json", {
+                method: "delete"
+            });
+            preparat = await response.json();
+
+            window.location = "adminRestaurant.html";
+
+        }
+    </script>
+</head>
+
+<body onload="getLista();">
+    <p>
+        Esti sigur ca vrei sa stergi preparatul &nbsp;
+        <span id="nume"> </span> ?
+        <a href="adminRestaurant.html"><button>Nu</button></a>
+        <br />
+        <button onclick="sterge()">Sterge</button>
+    </p>
+</body>
+
+</html>

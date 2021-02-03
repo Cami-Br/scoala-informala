@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Joke 2</title>
+    <style>
+        .hidden {
+            display: none !important;
+        }
+    </style>
+    <script>
+        let url = "http://api.icndb.com/jokes/random";
+        async function getJoke() {
+            let optionNr = document.querySelector("#optionsNr").value;
+            let options = document.querySelector("#options").value;
+            let url = "https://official-joke-api.appspot.com/jokes/";
+            let optionsMap = {
+                "OneAll": "random",
+                "OneProgramming": "programming/random",
+                "TenAll": "ten",
+                "TenProgramming": "programming/ten"
+            }
+            /*if (optionNr === "One") {
+                 url = "https://official-joke-api.appspot.com/jokes/random";
+                if (options === "Programming") {
+                     url = "https://official-joke-api.appspot.com/jokes/programming/random";
+                }
+            }
+            else{
+                url="https://official-joke-api.appspot.com/jokes/ten";
+                if(options === "Programming"){
+                    url="https://official-joke-api.appspot.com/jokes/programming/ten";
+                }
+
+            }*/
+            let response = await fetch(url + optionsMap[optionNr + options]);
+            let json = await response.json();
+            if (optionNr === "One" && options === "All") {
+                json = [json];
+            }
+            let html = "";
+            for (let joke of json) {
+                // echivalent cu:
+                //for(let i = 0; i<json.length; i++){
+                //let joke= json[i];
+
+                html +=
+                    `
+                    <li class="hidden">
+                       <span>${joke.setup}</span>
+                       <span class="hidden">${joke.punchline}</span>
+                    </li>
+                `
+            }
+            document.querySelector("#jokes10").innerHTML = html;
+            nextJoke();
+        }
+
+        function nextJoke() {
+            document.querySelector("li.hidden").classList.remove("hidden");
+            setTimeout(function () {
+                document.querySelector("span.hidden").classList.remove("hidden");
+            }, 5000);
+        }
+    </script>
+</head>
+
+<body>
+    <select id="optionsNr">
+        <option>One</option>
+        <option>Ten</option>
+    </select>
+    <select id="options">
+        <option>All</option>
+        <option>Programming</option>
+    </select>
+    <button onclick="getJoke();">Get Joke</button>
+    <ol id="jokes10">
+    </ol>
+    <button onclick="nextJoke();">Next Joke</button>
+
+</body>
+
+</html>

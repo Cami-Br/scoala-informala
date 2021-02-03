@@ -13,11 +13,11 @@ let urlWeather = {
 let iconUrl = "https://openweathermap.org/img/wn/";
 
 async function weatherNow() {
-    
+
     let cityName = document.querySelector("#cityName").value;
     let response = await fetch(`${urlWeather.base}q=${cityName}&units=metric&appid=${urlWeather.key}`);
     let json = await response.json();
-  
+
     document.querySelector("#gmap_canvas").src = `${locationUrl.base}q=${cityName}${locationUrl.rest}`;
     document.querySelector("#vremea0 img").src = iconUrl + json.weather[0].icon + '.png';
     document.querySelector("#vremea1").innerText = json.weather[0].description;
@@ -27,7 +27,7 @@ async function weatherNow() {
     document.querySelector("#vremea5").innerText = json.main.temp_min;
     document.querySelector("#vremea6").innerText = json.main.temp_max;
     document.querySelector(".mapouter").classList.remove("hidden");
-  
+
 }
 async function forecastWeather() {
     let cityName = document.querySelector("#cityName").value;
@@ -36,7 +36,7 @@ async function forecastWeather() {
     drawForecast();
     document.querySelector(".forecast").classList.remove("hidden");
     document.querySelector("#cityName").value = "";
-    
+
     function drawForecast() {
 
         let lista = json.list;
@@ -65,6 +65,6 @@ async function forecastWeather() {
         }
     }
 }
-function hideForecast(){
+function hideForecast() {
     document.querySelector(".forecast").classList.add("hidden");
 }

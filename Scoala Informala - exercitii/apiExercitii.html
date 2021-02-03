@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ApiExercitii</title>
+    <style>
+
+    </style>
+    <script>
+         async function changeImage() {
+            let pet = document.querySelector("#options").value;
+            let url = "";
+            if (pet === "Dog") {
+                let response = await fetch("https://random.dog/woof.json")
+                let json = await response.json();
+                url = json.url;
+            }
+            else if (pet === "Cat") {
+                let response = await fetch("https://aws.random.cat/meow")
+                let json = await response.json();
+                url = json.file;
+            }
+            else if(pet === "Fox"){
+                let response =  await fetch("https://randomfox.ca/floof/")
+                let json = await response.json();
+                url = json.image;
+            }
+            document.querySelector("#image").src = url;
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <select id="options">
+        <option>Dog</option>
+        <option>Cat</option>
+        <option>Fox</option>
+    </select>
+    <button onclick="changeImage();">Change Image</button>
+    <img src="" id="image" />
+
+</body>
+
+</html>
