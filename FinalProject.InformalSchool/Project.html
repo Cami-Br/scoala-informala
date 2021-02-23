@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Final Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="loadingShop.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    <style>
+        html {
+            background-color: white;
+        }
+
+        .container {
+            margin: auto;
+            max-width: 1300px;
+            display: grid;
+        }
+
+        .headPage {
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 5%;
+        }
+
+        #cosCumparaturi,
+        #admin {
+            float: right;
+            font-size: 20px;
+            margin-top: 2%;
+            padding: 5px 10px 5px;
+            border-radius: 6px;
+            border: rgb(219, 216, 216);
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        #cosCumparaturi {
+            margin-right: 3%;
+        }
+
+        #search,
+        input {
+            margin-top: 2%;
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 6px;
+            border: rgb(219, 216, 216);
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        img {
+            margin-top: 10px;
+            width: 200px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 20px;
+            font-family: 'Hammersmith One', sans-serif;
+        }
+
+        .grid-item {
+            padding: 10px;
+            margin-right: 2%;
+            margin-bottom: 4%;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        .detalii {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .detaliiButton {
+            margin-right: 15px;
+            font-size: 20px;
+            border-radius: 6px;
+            border: rgb(219, 216, 216);
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        button:hover {
+            background-color: #0082e6;
+            color: white;
+        }
+
+        .detaliiButton:hover {
+            background-color: #0082e6;
+            color: white;
+
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .lds-default div {
+            background: rgb(58, 56, 56);
+        }
+
+        #loading {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .displa {
+            display: grid;
+            grid-template-columns: 32% 32% 32% ;
+            grid-gap: 1em;
+        }
+
+        .cart {
+            width: 20px;
+        }
+
+        #logo {
+            width: 100px;
+            margin-bottom: 5px;
+        }
+
+        .mySlides {
+            display: none;
+            width: 50px;
+        }
+
+        .reclama {
+          
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+
+        }
+        .allcontent{
+            display:grid;
+            grid-template-columns: 85% 15%;
+            margin-top:5%;
+
+        }
+    </style>
+
+</head>
+
+<body onload="getProduse();">
+    <div id="loading" class="lds-default">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="container">
+        <span class="headPage">
+            <span>
+                <a href="admin.html"><button id="admin"><img class="cart" src="61457.png" /> Admin</button></a>
+                <a href="cos.html"><button id="cosCumparaturi"><img class="cart" src="cos.png" /> Coșul meu </button>
+                    <h1><img id="logo" src="logo2.jpg" /></h1>
+            </span>
+        </span>
+        <div class="allcontent">
+            <span class="displa">
+            </span>
+            <div class="reclama">
+                <div class="w3-container">
+                    <h2>Nou!!!</h2>
+                    <p>Cele mai bune preturi pentru tine!</p>
+                </div>
+
+                <div class="w3-content w3-section" style="max-width:500px">
+                    <img class="mySlides w3-animate-top"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYzVng_BBSBe24eN8PS9lWlHDzRCNgoE_iSw&usqp=CAU"
+                        style="width:100%">
+                    <img class="mySlides w3-animate-bottom"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1lihsAb7ZDzfgQgjou_TShpCzN41QvVzvuQ&usqp=CAU"
+                        style="width:100%">
+                    <img class="mySlides w3-animate-top"
+                        src="https://zoom.vodafone.ro/wp-content/uploads/2020/01/Cele-mai-noi-telefoane-%C3%AEn-20192020-scaled.jpg"
+                        style="width:100%">
+                    <img class="mySlides w3-animate-bottom"
+                        src="https://lcdn.altex.ro/resize/media/catalog/product/S/M/16fa6a9aef7ffd6209d5fd9338ffa0b1/SMTA20SBK_2.jpg"
+                        style="width:100%">
+                </div>
+                <div>
+                    <h1>Cele mai noi produse bla bla</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let produse = [];
+        let url = "https://my-shop-a36d2-default-rtdb.europe-west1.firebasedatabase.app/";
+
+        async function getProduse() {
+
+            document.querySelector("#loading").classList.remove("hidden");
+            const response = await fetch(url + ".json");
+            produse = await response.json();
+            document.querySelector("#loading").classList.add("hidden");
+            draw();
+        }
+        function draw() {
+            let str = "";
+            for (let [i, prod] of Object.entries(produse)) {
+                str += `
+                    <div>
+                        <div class="grid-item">
+                           <img src="${prod.poze}" alt="SamsungS21"/>
+                            <p>${prod.nume}</p>
+                            <div class="detalii">
+                            <div> ${prod.pret} lei</div>
+                            <a href="combodetaliii.html?id=${i}"<button class="detaliiButton">Detalii</button></a>
+                            </div>
+                        </div>
+                    </div>
+                 `
+            }
+            document.querySelector(".displa").innerHTML = str;
+        }
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2500);
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>
