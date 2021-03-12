@@ -40,7 +40,8 @@
             color: white;
         }
 
-        #cosCumparaturi, #magazin {
+        #cosCumparaturi,
+        #magazin {
             float: right;
             margin-top: 2%;
             font-size: 20px;
@@ -49,8 +50,9 @@
             border: rgb(219, 216, 216);
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
         }
-        #magazin{
-            margin-right:3%;
+
+        #magazin {
+            margin-right: 3%;
         }
 
         #cumpara {
@@ -86,7 +88,7 @@
             background-color: #f2f2f2;
         }
 
-        .btn {
+        .qbtn {
             background: none;
             color: inherit;
             border: none;
@@ -96,6 +98,14 @@
             outline: inherit;
             margin-left: 7%;
             margin-right: 7%;
+        }
+
+        .qbtn:hover {
+            background: none;
+            color: black;
+            -ms-transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            transform: scale(1.5);
         }
 
         h1 {
@@ -109,10 +119,12 @@
         .big {
             width: 50%;
         }
-        img{
-            width:20px;
+
+        img {
+            width: 20px;
         }
-        #sterge{
+
+        #sterge {
             background: none;
             color: blue;
             border: none;
@@ -121,6 +133,7 @@
             cursor: pointer;
             outline: inherit;
         }
+
         .lds-default div {
             background: rgb(58, 56, 56);
         }
@@ -133,61 +146,130 @@
             right: 0;
             margin: auto;
         }
-        .hidden{
-            display:none !important;
+
+        .hidden {
+            display: none !important;
         }
     </style>
     <script>
         let produse = {};
         let url = "https://my-shop-a36d2-default-rtdb.europe-west1.firebasedatabase.app/";
         let index = window.location.search.substr(4);
-      
         async function getProduse() {
-            document.querySelector("#loading").classList.remove("hidden");
             const response = await fetch(url + index + ".json");
             produse = await response.json();
-            document.querySelector("#loading").classList.add("hidden");
-            draw();
+            onLoadCart();
         }
-        function draw() {
+
+        function onLoadCart() {
+            let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
             let str = "";
-            for (let [id, prod] of Object.entries(produse)) {
+            for (let [id, prod] of Object.entries(obj)) {
                 str += `
 					<tr>
-					
 						<td class="big">${prod.nume}</td>
                         <td>${prod.pret}</td>
-						<td>${prod.cantitate}</td>
-                        <td id="subTotal"></td>
+						<td><button class="qbtn" onclick="decrement('${prod.index}');"> - </button><span class="text">${prod.quantity}</span><button class="qbtn" onclick="increment('${prod.index}');"> + </button></td>
+                        <td class="subTotal">${prod.pret * prod.quantity}</td>
                         <td><button id="sterge" onclick="del('${id}');">Șterge</button</td>
 					</tr>
 				`
             }
             document.querySelector("table tbody").innerHTML = str;
+            grandTotal();
         }
+        function grandTotal() {
+            let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
+            let total = 0;
+            for (let [id, prod] of Object.entries(obj)) {
+                localStorage.setItem("totalCost", prod.pret);
+                let cartCost = localStorage.getItem("totalCost");
+                let prodPret = parseInt(prod.pret);
+                let prodCant = parseInt(prod.quantity);
+                if (cartCost !== null) {
+                    total += prodCant * prodPret;
+                    localStorage.setItem("totalCost", total);
+                    document.querySelector("#total").innerHTML = `Total : ${total} $`;
+                } else {
+                    localStorage.setItem("totalCost", prod.pret);
+                }
+            }
+        }
+        function del(idx) {
+            let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
+
+            obj.splice(idx, 1);
+            localStorage.setItem("cos", JSON.stringify(obj));
+            onLoadCart();
+        }
+
+        function increment() {
+            let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
+            let found = false;
+            let cos = [];
+            for (let produs of obj) {
+                for (let [id, prod] of Object.entries(produse)) {
+                    console.log(produs.index)
+                    if (produs.index === id) {
+                        found = true;
+                    produs.quantity += 1;
+
+                    }
+
+                }
+                document.querySelectorAll(".text").innerHTML = produs.quantity;
+            }
+
+            localStorage.setItem("cos", JSON.stringify(obj));
+            onLoadCart();
+        }
+
+        function decrement(idx) {
+            let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
+            let object = obj[idx];
+            let quantity = object.quantity;
+            let index = object.index;
+            let found = false;
+            for (let produs of obj) {
+                if (produs.index === index) {
+
+                    found = true;
+                    produs.quantity -= 1;
+                    if (produs.quantity < 0) {
+                        alert(`The quantity number must be positive!`)
+                        return;
+                    }
+                    document.querySelectorAll(".text").innerHTML = produs.quantity;
+                }
+            }
+
+            if (!found) {
+                cos.push({ nume: nume, index: index, pret: price, quantity: quantity });
+            }
+
+            localStorage.setItem("cos", JSON.stringify(obj));
+            onLoadCart();
+        }
+
+
+
+
+
+
     </script>
 </head>
 
-<body>
-    <div id="loading" class="lds-default">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+<body onload="getProduse();">
     <div class="allcontent">
         <span class="headPage">
             <span>
-               <button id="cosCumparaturi"><img src="cos.png"/> Cosul Meu</button>
-               <a href="Project.html"><button id="magazin"><img src="24.png"/> Home</button></a>
+                <button id="cosCumparaturi"><img src="cos.png" /> Cosul Meu <span class="nrCart">0</span></button>
+                <a href="Project.html"><button id="magazin"><img src="24.png" /> Home</button></a>
                 <h1>Numele magazinului</h1>
             </span>
         </span>
@@ -206,7 +288,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -215,7 +297,7 @@
                 <p>TVA 0%</p>
                 <p>Transport 0%</p>
                 <h1 id="total"></h1>
-                <button id="cumpara"><img src="8.png"/> Cumpară</button>
+                <button id="cumpara"><img src="8.png" /> Cumpară</button>
             </div>
         </div>
     </div>

@@ -201,6 +201,7 @@
             document.querySelector("#loading").classList.add("hidden");
             draw();
         }
+        
         function draw() {
             let str = "";
             for (let [id, prod] of Object.entries(produse)) {
@@ -248,6 +249,7 @@
             window.location = "admin.html";
         }
         async function del(idx) {
+           
             if (confirm(`Esti sigur ca vrei sa stergi produsul ${produse[idx].nume} ?`)) {
                 const response = await fetch(url + idx + ".json", {
                     method: "delete"

@@ -165,7 +165,7 @@
         }
 
 
-        #cantitate {
+        #cantitateDorita {
             width: 30px;
         }
 
@@ -202,9 +202,10 @@
         .cart {
             width: 30px;
         }
-        #result{
-            color:red;
-            font-size:15px;
+
+        #result {
+            color: red;
+            font-size: 15px;
         }
     </style>
 
@@ -214,8 +215,9 @@
     <div class="allcontent">
         <span class="headPage">
             <span>
-                <a href="cos.html"><button id="cosCumparaturi"><img class="cart" src="cos.png" /> Coșul meu<sup><span id="result"></span></sup></button></a>
-                <a href="Project.html"><button id="magazin"><img class="cart"src="24.png" />Home</button></a>
+                <a href="cos.html"><button id="cosCumparaturi"><img class="cart" src="cos.png" /> Coșul meu <span
+                            class="nrCart">0</span></button></a>
+                <a href="Project.html"><button id="magazin"><img class="cart" src="24.png" />Home</button></a>
                 <h1>Numele magazinului</h1>
             </span>
         </span>
@@ -248,11 +250,11 @@
                 <h1 id="nume"></h1>
                 <p id="descriere"></p>
                 <h1 id="pret"></h1>
-                <p id="stoc"></p>
+                <p id="cantitate"></p>
                 <label for="quantity">Cantitate:</label>
-                <input type="number" id="cantitate" name="cantitate">
+                <input type="number" id="cantitateDorita" value="1">
                 <br />
-                <button id="adauga" onclick="clickCounter();">Adauga</button>
+                <button id="adauga" onclick="cartClicked();">Adauga</button>
 
             </div>
         </div>
@@ -270,14 +272,14 @@
             produse = await response.json();
             draw();
         }
+        
         function draw() {
             document.querySelector("#nume").innerText = produse.nume;
             document.querySelector("#descriere").innerText = produse.descriere;
             document.querySelector("#pret").innerText = `Pret: ${produse.pret} lei`;
-            document.querySelector("#stoc").innerText = `In stoc: ${produse.cantitate} buc.`;
+            document.querySelector("#cantitate").innerText = `In stoc: ${produse.cantitate} buc.`;
             document.querySelector("#poza1").src = produse.poze;
-            document.querySelector("#poza2").src = produse.poze;
-            document.querySelector("#poza3").src = produse.poze;
+         
         }
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -305,7 +307,58 @@
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
         }
-       
+
+        function cartClicked() {
+            let productNumbers = localStorage.getItem("cartClicked");
+            productNumbers = parseInt(productNumbers);
+            if (productNumbers) {
+                localStorage.setItem("cartClicked", productNumbers + 1);
+                document.querySelector(".nrCart").textContent = productNumbers + 1;
+            } else {
+                localStorage.setItem("cartClicked", 1);
+                document.querySelector(".nrCart").textContent = 1;
+            }
+
+
+            setItem();
+            draw();
+            document.querySelector("#cantitateDorita").value = "1";
+        }
+        onLoadCartNumbers();
+
+        function setItem() {
+            index = window.location.search.substr(4);
+            let nume = document.querySelector("#nume").innerText;
+            let price = produse.pret;
+            let cantitate = document.querySelector("#cantitateDorita").value;
+            let numberPrice = Number(price);
+            let quantity = Number(cantitate);
+            let cosStr = localStorage.getItem("cos");
+            let cos = [];
+            if (cosStr !== null) {
+                cos = JSON.parse(cosStr);
+            }
+            let found = false;
+            for (let produs of cos) {
+                if (produs.index === index) {
+                    found = true;
+                    produs.quantity += quantity;
+                    break;
+                }
+            }
+
+            if (!found) {
+                cos.push({ nume: nume, index: index, pret: price, quantity: quantity });
+            }
+            localStorage.setItem("cos", JSON.stringify(cos));
+        }
+
+        function onLoadCartNumbers() {
+            let productNumbers = localStorage.getItem("cartClicked");
+            if (productNumbers) {
+                document.querySelector(".nrCart").textContent = productNumbers;
+            }
+        }
     </script>
 </body>
 
