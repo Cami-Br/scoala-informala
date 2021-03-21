@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>C-Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="loadingShop.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    <style>
+        html {
+            background-color: rgb(223, 219, 219);
+        }
+
+        .container {
+            margin: auto;
+            max-width: 1300px;
+            display: grid;
+        }
+
+        .headPage {
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 2%;
+        }
+
+        #cosCumparaturi,
+        #home {
+            float: right;
+            font-size: 20px;
+            margin-top: 2%;
+            padding: 5px 10px 5px;
+            background: none;
+            color: black;
+            border: none;
+            cursor: pointer;
+            outline: inherit;
+        }
+
+        #cosCumparaturi {
+            margin-right: 3%;
+        }
+
+        #search,
+        input {
+            margin-top: 2%;
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 6px;
+            border: rgb(219, 216, 216);
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        img {
+            margin-top: 10px;
+            width: 200px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 20px;
+            font-family: 'Hammersmith One', sans-serif;
+        }
+
+        .grid-item {
+            padding: 10px;
+            margin-right: 2%;
+            margin-bottom: 4%;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        .detalii {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .detaliiButton {
+            margin-right: 15px;
+            font-size: 20px;
+            background: none;
+            color: black;
+            border: none;
+            cursor: pointer;
+            outline: inherit;
+        }
+
+        button:hover {
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        .detaliiButton:hover {
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .lds-default div {
+            background: rgb(58, 56, 56);
+        }
+
+        #loading {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .displa {
+            display: grid;
+            grid-template-columns: 32% 32% 32%;
+            grid-gap: 1em;
+        }
+
+        .cart {
+            width: 25px;
+            padding-bottom: 10px;
+        }
+
+        #logo {
+            width: 100px;
+            margin-bottom: 5px;
+        }
+
+        .mySlides {
+            display: none;
+            width: 50px;
+        }
+
+        .reclama {
+
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+
+        }
+
+        .allcontent {
+            display: grid;
+            grid-template-columns: 85% 15%;
+            margin-top: 5%;
+
+        }
+    </style>
+
+</head>
+
+<body onload="getProduse();">
+    <div id="loading" class="lds-default">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="container">
+        <span class="headPage">
+            <span>
+                <a href="cart.html"><button id="cosCumparaturi" title="Shopping Cart"><img class="cart"
+                            src="flowers/cos.png" /></button></a>
+                <a href="home.html"><button id="home" title="Home"><img src="flowers/24.png"
+                            class="cart" /></button></a>
+                <h1>C-Store</h1>
+            </span>
+        </span>
+        <div class="allcontent">
+            <span class="displa">
+            </span>
+            <div class="reclama">
+                <div class="w3-container">
+                    <p>We protect nature and help it to stay green!</p>
+                </div>
+                <div class="w3-content w3-section" style="max-width:500px">
+                    <img class="mySlides w3-animate-top" src="flowers/buchetmulticolor.jpeg" style="width:100%">
+                    <img class="mySlides w3-animate-bottom" src="flowers/lalelegalbene.jpeg" style="width:100%">
+                    <img class="mySlides w3-animate-top" src="flowers/lelelemov.jpeg" style="width:100%">
+                    <img class="mySlides w3-animate-bottom" src="flowers/trandafirroxi.jpeg" style="width:100%">
+                </div>
+                <div>
+                    <p> C-Store Flowers farms are managed according to rigorous environmental, social and economic
+                        standards. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let produse = [];
+        let url = "https://c-store-8102f-default-rtdb.europe-west1.firebasedatabase.app/";
+
+        async function getProduse() {
+
+            document.querySelector("#loading").classList.remove("hidden");
+            const response = await fetch(url + ".json");
+            produse = await response.json();
+            document.querySelector("#loading").classList.add("hidden");
+            draw();
+        }
+        function draw() {
+            let str = "";
+            for (let [i, prod] of Object.entries(produse)) {
+                let name = prod.nume;
+                if (name.includes("Rose")) {
+                    str += `
+                    <div>
+                        <div class="grid-item">
+                           <img src="${prod.poze}" alt="SamsungS21"/>
+                            <p>${prod.nume}</p>
+                            <div class="detalii">
+                            <div> ${prod.pret} lei</div>
+                            <a href="details.html?id=${i}"<button class="detaliiButton">Detalii</button></a>
+                            </div>
+                        </div>
+                    </div>
+                 `
+                }
+            }
+            document.querySelector(".displa").innerHTML = str;
+        }
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2500);
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>
