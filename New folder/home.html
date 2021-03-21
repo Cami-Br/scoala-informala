@@ -184,6 +184,96 @@
             margin-top: 7%;
             background-color: rgba(255, 255, 255, .2);
         }
+
+        .fa-bars {
+            width: 25px;
+            background: none;
+            float: left;
+            margin: 10%;
+        }
+
+        nav {
+            color: #fff;
+        }
+
+        nav .mainMenu {
+            display: flex;
+            list-style: none;
+        }
+
+        nav .mainMenu li a {
+            display: inline-block;
+            padding: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        nav .mainMenu li a:hover {
+            background: rgb(255, 94, 0);
+        }
+
+        nav .openMenu {
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        nav .mainMenu .closeMenu,
+        .icons i {
+            font-size: 2rem;
+            display: none;
+            cursor: pointer;
+        }
+
+        @media(max-width: 800px) {
+            nav .mainMenu {
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 10;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #000;
+                transition: top 1s ease;
+                display: none;
+            }
+        }
+
+
+        nav .mainMenu .closeMenu {
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+        }
+
+        nav .openMenu {
+            display: block;
+        }
+
+        nav .mainMenu li a:hover {
+            background: none;
+            color: rgb(255, 123, 0);
+            font-size: 1.6rem;
+        }
+
+        @media(max-width: 800px) {
+            #logo {
+                margin-top: 5%;
+                margin-right: 5%;
+                font-size: 25px;
+            }
+            h1,p{
+                font-size: 15px;
+            }
+            .emotions{
+                font-size: 30px;
+            }
+        }
     </style>
 
 </head>
@@ -205,11 +295,17 @@
     </div>
     <div class="container">
         <span class="headPage">
-            <span>
-                <a href="lalele.html"><button id="lalele">Tulips</button></a>
-                <a href="trandafiri.html"><button id="trandafiri">Roses</button></a>
-                <a href="buchet.html"><button id="buchet">Bouquets</button></a>
-            </span>
+            <nav>
+                <div class="openMenu">
+                    <img src="flowers/s.png" class="fa fa-bars" />
+                </div>
+                <ul class="mainMenu">
+                    <li><a href="lalele.html">Tulips</a></li>
+                    <li><a href="trandafiri.html">Roses</a></li>
+                    <li><a href="buchet.html">Bouquets</a></li>
+                    <div class="closeMenu"> X</div>
+                </ul>
+            </nav>
             <span id="logo">C-Store</span>
             <span>
                 <a href="admin.html"><button id="admin" title="Admin"><img class="cart"
@@ -244,6 +340,22 @@
             const response = await fetch(url + ".json");
             produse = await response.json();
             document.querySelector("#loading").classList.add("hidden");
+        }
+
+
+        const mainMenu = document.querySelector('.mainMenu');
+        const closeMenu = document.querySelector('.closeMenu');
+        const openMenu = document.querySelector('.openMenu');
+
+        openMenu.addEventListener('click', show);
+        closeMenu.addEventListener('click', close);
+
+        function show() {
+            mainMenu.style.display = 'flex';
+            mainMenu.style.top = '0';
+        }
+        function close() {
+            mainMenu.style.top = '-105%';
         }
     </script>
 </body>
