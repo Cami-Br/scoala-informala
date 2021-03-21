@@ -56,15 +56,6 @@
             margin-right: 3%;
         }
 
-        #search,
-        input {
-            margin-top: 2%;
-            font-size: 20px;
-            padding: 10px;
-            border-radius: 6px;
-            border: rgb(219, 216, 216);
-            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
-        }
 
         p {
             text-align: center;
@@ -79,23 +70,6 @@
             box-sizing: border-box;
             text-align: center;
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
-        }
-
-        .detalii {
-            display: grid;
-            grid-template-columns: 50% 50%;
-            font-size: 25px;
-            margin-bottom: 10px;
-        }
-
-        .detaliiButton {
-            margin-right: 15px;
-            font-size: 20px;
-            background: none;
-            color: black;
-            border: none;
-            cursor: pointer;
-            outline: inherit;
         }
 
         button:hover {
@@ -121,11 +95,6 @@
             left: 0;
             right: 0;
             margin: auto;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
         }
 
         .displa {
@@ -181,7 +150,7 @@
         }
 
         footer {
-            margin-top: 7%;
+            margin-top: 5%;
             background-color: rgba(255, 255, 255, .2);
         }
 
@@ -193,7 +162,7 @@
         }
 
         nav {
-            color: #fff;
+            color: white;
         }
 
         nav .mainMenu {
@@ -202,27 +171,25 @@
         }
 
         nav .mainMenu li a {
+            margin-left: 10%;
             display: inline-block;
             padding: 10px;
             text-decoration: none;
-            color: #fff;
+            color: black;
             font-size: 1.5rem;
         }
 
         nav .mainMenu li a:hover {
-            background: rgb(255, 94, 0);
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
         }
 
-        nav .openMenu {
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        nav .mainMenu .closeMenu,
-        .icons i {
-            font-size: 2rem;
+        .openMenu {
             display: none;
-            cursor: pointer;
+        }
+
+        .closeMenu {
+            display: none;
+
         }
 
         @media(max-width: 800px) {
@@ -235,30 +202,38 @@
                 z-index: 10;
                 flex-direction: column;
                 justify-content: center;
-                align-items: center;
+                text-align: start;
                 background: #000;
                 transition: top 1s ease;
                 display: none;
             }
-        }
 
+            nav .mainMenu .closeMenu {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 10px;
 
-        nav .mainMenu .closeMenu {
-            display: block;
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            }
 
-        }
+            nav .openMenu {
+                display: block;
+                color: blanchedalmond;
+            }
 
-        nav .openMenu {
-            display: block;
-        }
+            nav .mainMenu li a {
+                color: white;
+                font-size: 40px;
+            }
 
-        nav .mainMenu li a:hover {
-            background: none;
-            color: rgb(255, 123, 0);
-            font-size: 1.6rem;
+            nav .mainMenu li a:hover {
+                background: none;
+                font-size: 1.6rem;
+            }
+
+            nav .mainMenu a {
+                color: white;
+            }
         }
 
         @media(max-width: 800px) {
@@ -267,11 +242,20 @@
                 margin-right: 5%;
                 font-size: 25px;
             }
-            h1,p{
+
+            h1,
+            p {
                 font-size: 15px;
             }
-            .emotions{
+
+            .emotions {
                 font-size: 30px;
+            }
+            html{
+                background-size: cover;
+            }
+            footer{
+                margin-top:10%;
             }
         }
     </style>
