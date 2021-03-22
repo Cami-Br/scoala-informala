@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalii Magazin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Verdana, sans-serif;
+            margin: 0
+        }
+
+        .mySlides {
+            display: none
+        }
+
+        img {
+            vertical-align: middle;
+            padding: 6%;
+        }
+        .container {
+            margin: auto;
+            margin-top: 3%;
+            max-width: 1000px;
+            padding: 3%;
+            display: grid;
+            box-sizing: border-box;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+            grid-template-columns: 50% 50%;
+        }
+
+        .allcontent {
+            margin: auto;
+            max-width: 1000px;
+            display: grid;
+        }
+
+        .headPage {
+            margin-top: 2%;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .descriereProdus {
+            text-align: center;
+            padding: 10%;
+        }
+
+        button:hover {
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        #cosCumparaturi,
+        #home,
+        #back {
+            float: right;
+            font-size: 20px;
+            margin-top: 2%;
+            padding: 5px 10px 5px;
+            background: none;
+            color: black;
+            border: none;
+            cursor: pointer;
+            outline: inherit;
+        }
+
+        #back {
+            font-size: 25px;
+        }
+
+        #adauga {
+            font-size: 20px;
+            margin-top: 10%;
+            padding: 5px 10px 5px;
+            background: none;
+            color: black;
+            border: none;
+            cursor: pointer;
+            outline: inherit;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        #adauga:hover {
+            -ms-transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        #home,
+        #back {
+            margin-right: 1%;
+        }
+
+
+        #cantitateDorita {
+            width: 30px;
+        }
+
+        .cart {
+            width: 30px;
+        }
+
+        #result {
+            color: red;
+            font-size: 15px;
+        }
+        @media(max-width: 800px){
+            .headPage{
+                height: 40px;
+            }
+            #cosCumparaturi, #home{
+                font-size:15px;
+                margin-top:10%;
+            }
+            h1{
+                font-size: 20px;
+                margin-top: 13%;
+                margin-left: 1%;
+            }
+            #back{
+                font-size:17px;
+                margin-top:12%; 
+            }
+            .container{
+                display: grid;
+                grid-template-columns: 100%;
+            }
+        }
+        #poza1{
+            max-width:400px;
+        }
+    </style>
+
+</head>
+
+<body onload="getProduse(); cartNumber()">
+    <div class="allcontent">
+        <span class="headPage">
+            <span>
+                <a href="cart.html"><button id="cosCumparaturi" title="Shopping Cart"><img class="cart"
+                            src="flowers/cos.png" /><span class="nrCart">0</span></button></a>
+                <a href="home.html"><button id="home" title="Home"><img class="cart"
+                            src="flowers/24.png" /></button></a>
+                <button id="back" onclick="goBack();">Back</button>
+                <h1>C-Store</h1>
+            </span>
+        </span>
+        <div class="container">
+          <div>
+              <img src="" id="poza1" style="width:100%" />
+          </div>
+            <div class="descriereProdus">
+                <h1 id="nume"></h1>
+                <p id="descriere"></p>
+                <h1 id="pret"></h1>
+                <p id="cantitate"></p>
+                <label for="quantity">Cantitate:</label>
+                <input type="number" id="cantitateDorita" value="1">
+                <br />
+                <button id="adauga" onclick="cartNumber(); setItem(); "> + Add</button>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        let url = "https://c-store-8102f-default-rtdb.europe-west1.firebasedatabase.app/"
+        let produse = {};
+        let index = window.location.search.substr(4);
+        if (index.length < 1) {
+            window.location = "home.html";
+        }
+
+        async function getProduse() {
+            const response = await fetch(url + index + ".json");
+            produse = await response.json();
+            draw();
+        }
+
+        function draw() {
+            document.querySelector("#nume").innerText = produse.nume;
+            document.querySelector("#descriere").innerText = produse.descriere;
+            document.querySelector("#pret").innerText = `Pret: ${produse.pret} lei`;
+            document.querySelector("#cantitate").innerText = `In stoc: ${produse.cantitate} buc.`;
+            document.querySelector("#poza1").src = produse.poze;
+
+        }
+        function cartNumber() {
+            let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
+            let nr = 0;
+            for (let [id, prod] of Object.entries(obj)) {
+                nr += prod.quantity;
+            }
+            document.querySelector(".nrCart").innerHTML = nr;
+            draw();
+        }
+        function setItem() {
+            index = window.location.search.substr(4);
+            let nume = document.querySelector("#nume").innerText;
+            let price = produse.pret;
+            let cantitate = document.querySelector("#cantitateDorita").value;
+            let numberPrice = Number(price);
+            let quantity = Number(cantitate);
+            let cosStr = localStorage.getItem("cos");
+            let cos = [];
+            if (cosStr !== null) {
+                cos = JSON.parse(cosStr);
+            }
+            let found = false;
+            for (let produs of cos) {
+                if (produs.index === index) {
+                    found = true;
+                    produs.quantity += quantity;
+                    break;
+                }
+            }
+
+            if (!found) {
+                cos.push({ nume: nume, index: index, pret: price, quantity: quantity });
+            }
+            localStorage.setItem("cos", JSON.stringify(cos));
+        }
+
+        
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
