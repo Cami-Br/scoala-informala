@@ -63,7 +63,8 @@
             outline: inherit;
             font-size: 20px;
         }
-        button:hover{
+
+        button:hover {
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
         }
 
@@ -101,7 +102,7 @@
         }
 
         .gestionareProd {
-            margin: auto;
+            margin: 0;
             margin-top: 3%;
             width: 1200px;
             box-sizing: border-box;
@@ -194,6 +195,15 @@
         .hidden {
             display: none;
         }
+
+        @media(max-width: 800px) {
+            .allcontent {
+                max-width: 800px;
+            }
+          
+
+
+        }
     </style>
     <script>
         let produse = {};
@@ -208,7 +218,7 @@
             document.querySelector("#loading").classList.add("hidden");
             draw();
         }
-        
+
         function draw() {
             let str = "";
             for (let [id, prod] of Object.entries(produse)) {
@@ -256,7 +266,7 @@
             window.location = "admin.html";
         }
         async function del(idx) {
-           
+
             if (confirm(`Esti sigur ca vrei sa stergi produsul ${produse[idx].nume} ?`)) {
                 const response = await fetch(url + idx + ".json", {
                     method: "delete"
@@ -301,7 +311,7 @@
                     'Content-Type': 'application/json'
                 },
             });
-    
+
             await getProduse();
             window.location = "admin.html";
 
@@ -328,11 +338,12 @@
     </div>
     <div class="allcontent">
         <span class="headPage">
-            <span>
-                <a href="cart.html"><button id="cosCumparaturi" title="Shopping Cart"><img class="cart" src="flowers/cos.png" /></button></a>
-                <a href="home.html"><button id="home" title="Home"><img class="cart" src="flowers/24.png" /></button></a>
-                <h1>C-Store</h1>
-            </span>
+            <span class="head">
+            <a href="cart.html"><button id="cosCumparaturi" title="Shopping Cart"><img class="cart"
+                        src="flowers/cos.png" /></button></a>
+            <a href="home.html"><button id="home" title="Home"><img class="cart" src="flowers/24.png" /></button></a>
+            <h1>C-Store</h1>
+        </span>
         </span>
         <div class="gestionareProd">
             <div class="adaugare">
@@ -358,8 +369,8 @@
         <div class="form hidden">
             <span class="savecancel">
                 <span>
-                    <button id="cancel" onclick="anuleaza();"title="Cancel"> Cancel</button>
-                    <button id="save" onclick="salveaza(event);"title="Save"> + Save</button>
+                    <button id="cancel" onclick="anuleaza();" title="Cancel"> Cancel</button>
+                    <button id="save" onclick="salveaza(event);" title="Save"> + Save</button>
                     <button id="edit" class="hidden" onclick="editare2(event);" title="Edit">Edit</button>
                     <h1>Add new product</h1>
                 </span>

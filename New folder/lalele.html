@@ -145,6 +145,23 @@
             margin-top: 5%;
 
         }
+
+        @media(max-width: 800px) {
+            .allcontent{
+               display:grid;
+               grid-template-columns: 100%;
+            }
+            .displa{
+                display:grid;
+               grid-template-columns: 100%;
+               grid-gap:unset;
+               margin:2%;
+            }
+            h1{
+                margin:3%;
+            }
+           
+        }
     </style>
 
 </head>
@@ -241,19 +258,19 @@
                 x[myIndex - 1].style.display = "block";
                 setTimeout(carousel, 2500);
             }
-            
-        function cartNumber() {
-            let strCart = localStorage.getItem("cos");
-            let obj = JSON.parse(strCart);
-            let nr =0;
-            for (let [id, prod] of Object.entries(obj)) {
-                console.log(prod.quantity)
-               nr +=prod.quantity;
-				
+
+            function cartNumber() {
+                let strCart = localStorage.getItem("cos");
+                let obj = JSON.parse(strCart);
+                let nr = 0;
+                for (let [id, prod] of Object.entries(obj)) {
+                    console.log(prod.quantity)
+                    nr += prod.quantity;
+
+                }
+                document.querySelector(".nrCart").innerHTML = nr;
+                draw();
             }
-            document.querySelector(".nrCart").innerHTML = nr;
-            draw();
-        }
 
 
         </script>
