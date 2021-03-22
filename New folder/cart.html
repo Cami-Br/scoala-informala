@@ -35,17 +35,7 @@
             justify-content: space-around;
         }
 
-        #cumpara:hover {
-            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
-
-        }
-
-        #back:hover {
-            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
-
-        }
-
-        #home:hover {
+       button:hover {
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
 
         }
@@ -81,26 +71,16 @@
         .descriereProdus {
             text-align: center;
             padding: 10%;
+            margin-top: 2%;
         }
 
         .qbtn {
-            background: none;
-            color: inherit;
-            border: none;
-            padding: 0;
-            font: inherit;
+        
+            padding: 5px;
             cursor: pointer;
-            outline: inherit;
-            margin-left: 7%;
-            margin-right: 7%;
-        }
-
-        .qbtn:hover {
-            background: none;
-            color: black;
-            -ms-transform: scale(1.5);
-            -webkit-transform: scale(1.5);
-            transform: scale(1.5);
+            margin-left: 2%;
+            margin-right: 2%;
+            margin-bottom: 1%;
         }
 
         h1 {
@@ -120,10 +100,11 @@
             background: none;
             color: blue;
             border: none;
-            padding: 0;
+            padding: 5px;
             font: inherit;
             cursor: pointer;
             outline: inherit;
+            margin-bottom: 1%;
         }
 
         .lds-default div {
@@ -142,12 +123,34 @@
         .hidden {
             display: none !important;
         }
+        .box {
+            margin-left: 2%;
+            text-align: center;
+            margin-bottom: 2%;
+            box-sizing: border-box;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
+        }
+
+        .description {
+            color: black;
+            display:flex;
+            justify-content: center;
+
+        }
+        .subTotal{
+            margin-left:10%;
+            margin-right: 10%;
+        }
 
         @media(max-width: 800px) {
             .container {
                 max-width: 700px;
                 display: grid;
                 grid-template-columns: 100%;
+            }
+
+            .allcontent {
+                max-width: 700px;
             }
 
             h1 {
@@ -167,40 +170,34 @@
                 width: 20px;
                 margin-top: 50%;
             }
-            .table{
-               margin:0;
-           }
-           .tbody{
-               margin:0 auto;
-               padding: 0px;
-           }
-
         }
 
         @media(max-width: 600px) {
-           .table{
-               margin:0;
-           }
+            .table {
+                margin: 0;
+            }
+
+            .allcontent {
+                max-width: 500px;
+            }
+
             .container {
                 max-width: 500px;
                 display: grid;
                 grid-template-columns: 100%;
+                margin:0 auto;
+                box-shadow: none;
             }
 
             h1 {
                 font-size: 20px;
             }
+            .box{
+                margin:0;
+            }
         }
-        .box{
-            text-align: center;
-            box-sizing: border-box;
-            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
-        }
-        .description{
-            display: flex;
-            flex-direction:column;
 
-        }
+        
     </style>
     <script>
         let produse = {};
@@ -219,13 +216,13 @@
             for (let [id, prod] of Object.entries(obj)) {
                 str += `
                 <div class="box">
-                   <div><b>${prod.nume}</b></div>
+                  <div><b>${prod.nume}</b></div>
                    <div>${prod.pret} $</div>
                    <hr>
                    <span class="description">
-                   <div><button  class="qbtn" onclick="decrement('${prod.index}');"> - </button><span class="text">${prod.quantity}</span><button class="qbtn" onclick="increment('${prod.index}');"> + </button></div>
+                   <button  class="qbtn" onclick="decrement('${prod.index}');"> -</button><span class="text">${prod.quantity}</span><button class="qbtn" onclick="increment('${prod.index}');">+ </button>
                    <div class="subTotal">${prod.pret * prod.quantity}$</div>
-                   <div><button id="sterge" onclick="del('${id}');">Șterge</button></div>
+                   <button id="sterge" onclick="del('${id}');">Delete</button></div>
                    </span>
                 </div>
 				`
@@ -252,7 +249,7 @@
                 produseAdaugate += prodCantitate;
                 total += prodCantitate * prodPret;
                 document.querySelector("#total").innerHTML = `Total: ${total} $`;
-                document.querySelector("#nrProduse").innerHTML = `Produse: ${produseAdaugate}`;
+                document.querySelector("#nrProduse").innerHTML = `Products: ${produseAdaugate}`;
 
             }
         }
@@ -322,7 +319,7 @@
 
         <div class="container">
             <div class="table">
-                <h1>Coșul meu</h1>
+                <h1>My Shopping Cart</h1>
                 <div class="tbody">
                 </div>
             </div>
