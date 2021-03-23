@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Detalii Magazin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +23,7 @@
             vertical-align: middle;
             padding: 6%;
         }
+
         .container {
             margin: auto;
             margin-top: 3%;
@@ -110,41 +112,48 @@
             color: red;
             font-size: 15px;
         }
-        @media(max-width: 800px){
-            .headPage{
+
+        @media(max-width: 800px) {
+            .headPage {
                 height: 40px;
             }
-            #cosCumparaturi, #home{
-                font-size:15px;
-                margin-top:10%;
+
+            #cosCumparaturi,
+            #home {
+                font-size: 15px;
+                margin-top: 10%;
             }
-            h1{
+
+            h1 {
                 font-size: 20px;
                 margin-top: 13%;
                 margin-left: 1%;
             }
-            #back{
-                font-size:17px;
-                margin-top:12%; 
+
+            #back {
+                font-size: 17px;
+                margin-top: 12%;
             }
-            .container{
+
+            .container {
                 display: grid;
                 grid-template-columns: 100%;
             }
         }
-        #poza1{
-            max-width:400px;
+
+        #poza1 {
+            max-width: 400px;
         }
     </style>
 
 </head>
 
-<body onload="getProduse(); cartNumber()">
+<body onload="getProduse();">
     <div class="allcontent">
         <span class="headPage">
             <span>
                 <a href="cart.html"><button id="cosCumparaturi" title="Shopping Cart"><img class="cart"
-                            src="flowers/cos.png" /><span class="nrCart">0</span></button></a>
+                            src="flowers/cos.png" /><span class="nrCart"></span></button></a>
                 <a href="home.html"><button id="home" title="Home"><img class="cart"
                             src="flowers/24.png" /></button></a>
                 <button id="back" onclick="goBack();">Back</button>
@@ -152,9 +161,9 @@
             </span>
         </span>
         <div class="container">
-          <div>
-              <img src="" id="poza1" style="width:100%" />
-          </div>
+            <div>
+                <img src="" id="poza1" style="width:100%" />
+            </div>
             <div class="descriereProdus">
                 <h1 id="nume"></h1>
                 <p id="descriere"></p>
@@ -163,7 +172,7 @@
                 <label for="quantity">Cantitate:</label>
                 <input type="number" id="cantitateDorita" value="1">
                 <br />
-                <button id="adauga" onclick="cartNumber(); setItem(); "> + Add</button>
+                <button id="adauga" onclick="setItem(); "> + Add</button>
 
             </div>
         </div>
@@ -190,16 +199,7 @@
             document.querySelector("#poza1").src = produse.poze;
 
         }
-        function cartNumber() {
-            let strCart = localStorage.getItem("cos");
-            let obj = JSON.parse(strCart);
-            let nr = 0;
-            for (let [id, prod] of Object.entries(obj)) {
-                nr += prod.quantity;
-            }
-            document.querySelector(".nrCart").innerHTML = nr;
-            draw();
-        }
+       
         function setItem() {
             index = window.location.search.substr(4);
             let nume = document.querySelector("#nume").innerText;
@@ -227,10 +227,11 @@
             localStorage.setItem("cos", JSON.stringify(cos));
         }
 
-        
+
         function goBack() {
             window.history.back();
         }
     </script>
 </body>
+
 </html>
