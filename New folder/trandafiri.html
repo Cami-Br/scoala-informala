@@ -194,7 +194,7 @@
         <span class="headPage">
             <span>
                 <a href="cart.html"><button id="cosCumparaturi" title="Shopping Cart"><img class="cart"
-                            src="flowers/cos.png" /></button></a>
+                            src="flowers/cos.png" /><span class="nrCart">0</span></button></a>
                 <a href="home.html"><button id="home" title="Home"><img src="flowers/24.png"
                             class="cart" /></button></a>
                 <h1>C-Store</h1>
@@ -231,6 +231,7 @@
             produse = await response.json();
             document.querySelector("#loading").classList.add("hidden");
             draw();
+            nrCart();
         }
         function draw() {
             let str = "";
@@ -253,20 +254,15 @@
             }
             document.querySelector(".displa").innerHTML = str;
         }
-        var myIndex = 0;
-        carousel();
-
-        function carousel() {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
+        function nrCart() {
+                let strCart = localStorage.getItem("cos");
+                let obj = JSON.parse(strCart);
+                let nr = 0;
+                for (let [id, prod] of Object.entries(obj)) {
+                    nr += prod.quantity;
+                }
+                document.querySelector(".nrCart").innerHTML = nr;
             }
-            myIndex++;
-            if (myIndex > x.length) { myIndex = 1 }
-            x[myIndex - 1].style.display = "block";
-            setTimeout(carousel, 2500);
-        }
 
     </script>
 

@@ -326,7 +326,7 @@
                 <a href="admin.html"><button id="admin" title="Admin"><img class="cart"
                             src="flowers/61457.png" /></button></a>
                 <a href="cart.html"><button id="cosCumparaturi" title="Shopping cart"><img class="cart"
-                            src="flowers/cos.png" /></button></a>
+                            src="flowers/cos.png" /><span class="nrCart">0</span></button></a>
             </span>
         </span>
         <section id="text-display">
@@ -355,6 +355,7 @@
             const response = await fetch(url + ".json");
             produse = await response.json();
             document.querySelector("#loading").classList.add("hidden");
+            nrCart();
         }
 
 
@@ -371,6 +372,15 @@
         }
         function close() {
             mainMenu.style.display = 'none';
+        }
+        function nrCart(){
+        let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
+            let nr=0;
+            for (let [id, prod] of Object.entries(obj)) {
+                nr += prod.quantity;
+            }
+            document.querySelector(".nrCart").innerHTML = nr;
         }
     </script>
 </body>

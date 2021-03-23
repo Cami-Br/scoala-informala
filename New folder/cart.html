@@ -216,7 +216,7 @@
             for (let [id, prod] of Object.entries(obj)) {
                 str += `
                 <div class="box">
-                  <div><b>${prod.nume}</b></div>
+                  <a href="detalii.html?id=${prod.index}">${prod.nume}</a>
                    <div>${prod.pret} $</div>
                    <hr>
                    <span class="description">

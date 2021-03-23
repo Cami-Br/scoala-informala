@@ -189,6 +189,7 @@
             const response = await fetch(url + index + ".json");
             produse = await response.json();
             draw();
+            nrCart();
         }
 
         function draw() {
@@ -198,6 +199,15 @@
             document.querySelector("#cantitate").innerText = `In stoc: ${produse.cantitate} buc.`;
             document.querySelector("#poza1").src = produse.poze;
 
+        }
+     function nrCart(){
+        let strCart = localStorage.getItem("cos");
+            let obj = JSON.parse(strCart);
+            let nr=0;
+            for (let [id, prod] of Object.entries(obj)) {
+                nr += prod.quantity;
+            }
+            document.querySelector(".nrCart").innerHTML = nr;
         }
        
         function setItem() {
@@ -217,6 +227,10 @@
                 if (produs.index === index) {
                     found = true;
                     produs.quantity += quantity;
+                   if(produs.quantity > produse.cantitate){
+                       alert("Out of stock!");
+                       return;
+                   }
                     break;
                 }
             }
@@ -224,7 +238,9 @@
             if (!found) {
                 cos.push({ nume: nume, index: index, pret: price, quantity: quantity });
             }
+            alert("Adedd to cart!")
             localStorage.setItem("cos", JSON.stringify(cos));
+            nrCart();
         }
 
 
