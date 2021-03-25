@@ -25,13 +25,14 @@
             flex-direction: column;
             justify-content: space-around;
             margin-top: 2%;
+            background-image: url('flowers/buchetmulticolor.jpeg');
         }
 
         #cosCumparaturi,
         #home {
             float: right;
             font-size: 20px;
-            margin-top: 2%;
+            margin-top: 1%;
             padding: 5px 10px 5px;
             background: none;
             color: black;
@@ -44,16 +45,7 @@
             margin-right: 3%;
         }
 
-        #search,
-        input {
-            margin-top: 2%;
-            font-size: 20px;
-            padding: 10px;
-            border-radius: 6px;
-            border: rgb(219, 216, 216);
-            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .4);
-        }
-
+        
         img {
             margin-top: 10px;
             width: 200px;
@@ -157,19 +149,22 @@
             margin-top: 5%;
 
         }
+
         @media(max-width: 800px) {
-            .allcontent{
-               display:grid;
-               grid-template-columns: 100%;
+            .allcontent {
+                display: grid;
+                grid-template-columns: 100%;
             }
-            .displa{
-                display:grid;
-               grid-template-columns: 100%;
+
+            .displa {
+                display: grid;
+                grid-template-columns: 100%;
             }
-            h1{
-                margin:3%;
+
+            h1 {
+                margin: 3%;
             }
-           
+
         }
     </style>
 
@@ -244,8 +239,8 @@
                            <img src="${prod.poze}" alt="SamsungS21"/>
                             <p>${prod.nume}</p>
                             <div class="detalii">
-                            <div> ${prod.pret} lei</div>
-                            <a href="detalii.html?id=${i}"<button class="detaliiButton">Detalii</button></a>
+                            <div> ${prod.pret} $</div>
+                            <a href="detalii.html?id=${i}"<button class="detaliiButton">Details</button></a>
                             </div>
                         </div>
                     </div>
@@ -254,15 +249,29 @@
             }
             document.querySelector(".displa").innerHTML = str;
         }
-        function nrCart(){
-        let strCart = localStorage.getItem("cos");
+        function nrCart() {
+            let strCart = localStorage.getItem("cos");
             let obj = JSON.parse(strCart);
-            let nr=0;
+            let nr = 0;
             for (let [id, prod] of Object.entries(obj)) {
                 nr += prod.quantity;
             }
             document.querySelector(".nrCart").innerHTML = nr;
+        } var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2500);
         }
+
     </script>
 
 

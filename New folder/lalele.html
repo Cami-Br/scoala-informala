@@ -25,13 +25,14 @@
             flex-direction: column;
             justify-content: space-around;
             margin-top: 2%;
+            background-image: url('flowers/buchetmulticolor.jpeg');
         }
 
         #cosCumparaturi,
         #home {
             float: right;
             font-size: 20px;
-            margin-top: 2%;
+            margin-top: 1%;
             padding: 5px 10px 5px;
             background: none;
             color: black;
@@ -237,8 +238,8 @@
                            <img src="${prod.poze}" alt="Flower"/>
                             <p>${prod.nume}</p>
                             <div class="detalii">
-                            <div> ${prod.pret} lei</div>
-                            <a href="detalii.html?id=${i}"<button class="detaliiButton">Detalii</button></a>
+                            <div> ${prod.pret} $</div>
+                            <a href="detalii.html?id=${i}"<button class="detaliiButton">Details</button></a>
                             </div>
                         </div>
                     </div>
@@ -255,6 +256,20 @@
                     nr += prod.quantity;
                 }
                 document.querySelector(".nrCart").innerHTML = nr;
+            }
+            var myIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) { myIndex = 1 }
+                x[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 2500);
             }
         </script>
 

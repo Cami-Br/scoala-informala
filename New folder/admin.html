@@ -231,7 +231,7 @@
 						<td><button id="editare" onclick="editare('${id}');">${prod.nume}</button></td>
                         <td>${prod.pret}</td>
 						<td>${prod.cantitate}</td>
-                        <td><button id="sterge" onclick="del('${id}');">Șterge</button</td>
+                        <td><button id="sterge" onclick="del('${id}');">Delete</button</td>
 					</tr>
 				`
             }
@@ -357,10 +357,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Imagine</th>
-                            <th class="big">Nume</th>
-                            <th>Preț</th>
-                            <th>Cantitate</th>
+                            <th>Image</th>
+                            <th class="big">Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -380,23 +380,23 @@
             </span>
             <table>
                 <tr>
-                    <td>Imagine</td>
+                    <td>Image</td>
                     <td><textarea name="poze"></textarea></td>
                 </tr>
                 <tr>
-                    <td>Nume</td>
+                    <td>Name</td>
                     <td> <input type="text" name="nume"></td>
                 </tr>
                 <tr>
-                    <td>Descriere</td>
+                    <td>Description</td>
                     <td><textarea name="descriere"></textarea></td>
                 </tr>
                 <tr>
-                    <td>Preț</td>
+                    <td>Price</td>
                     <td><input type="text" name="pret" /></td>
                 </tr>
                 <tr>
-                    <td>Cantitate</td>
+                    <td>Quantity</td>
                     <td> <input type="text" name="cantitate"></td>
                 </tr>
             </table>
