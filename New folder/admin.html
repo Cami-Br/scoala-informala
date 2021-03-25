@@ -5,8 +5,6 @@
     <title>Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="loadingShop.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
     <style>
         html {
             background-color: white;
@@ -195,17 +193,17 @@
         .hidden {
             display: none;
         }
+        .notAv{
+            display:none;
+        }
 
         @media(max-width: 800px) {
-            .allcontent {
-                max-width: 800px;
+            .notAv{
+                display:inline-block;
             }
-            .big{
-                width: 30%;
+            .allcontent{
+                display: none;
             }
-          
-
-
         }
     </style>
     <script>
@@ -401,6 +399,11 @@
                 </tr>
             </table>
         </div>
+    </div>
+    <div class="notAv">
+        <p>
+            This page is not available on your device.
+        </p>
     </div>
 
 </body>

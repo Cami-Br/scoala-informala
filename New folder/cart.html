@@ -2,11 +2,9 @@
 <html>
 
 <head>
-    <title>Cos</title>
+    <title>Cart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="loadingShop.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
     <style>
         html {
             background-color: white;
@@ -197,9 +195,36 @@
                 margin:0;
             }
         }
-
-        
     </style>
+    
+</head>
+
+<body onload="getProduse();">
+    <div class="allcontent">
+        <span class="headPage">
+            <span>
+                <a href="home.html"><button id="home" title="Home"><img src="flowers/24.png" /></button></a>
+                <button id="back" onclick="goBack();">Back</button>
+                <h1>C-Store</h1>
+            </span>
+        </span>
+
+        <div class="container">
+            <div class="table">
+                <h1>My Shopping Cart</h1>
+                <div class="tbody">
+                </div>
+            </div>
+            <div class="descriereProdus">
+                <p id="nrProduse"></p>
+                <p>TVA 0%</p>
+                <p>Transport 0%</p>
+                <h1 id="total"></h1>
+                <button id="cumpara"><img src="flowers/8.png" /> Buy</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let produse = {};
         let url = "https://c-store-8102f-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -306,33 +331,6 @@
             window.history.back();
         }
     </script>
-</head>
-
-<body onload="getProduse();">
-    <div class="allcontent">
-        <span class="headPage">
-            <span>
-                <a href="home.html"><button id="home" title="Home"><img src="flowers/24.png" /></button></a>
-                <button id="back" onclick="goBack();">Back</button>
-                <h1>C-Store</h1>
-            </span>
-        </span>
-
-        <div class="container">
-            <div class="table">
-                <h1>My Shopping Cart</h1>
-                <div class="tbody">
-                </div>
-            </div>
-            <div class="descriereProdus">
-                <p id="nrProduse"></p>
-                <p>TVA 0%</p>
-                <p>Transport 0%</p>
-                <h1 id="total"></h1>
-                <button id="cumpara"><img src="flowers/8.png" /> Buy</button>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
