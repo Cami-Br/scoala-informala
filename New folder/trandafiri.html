@@ -9,11 +9,12 @@
     <style>
         html {
             background-color: rgb(223, 219, 219);
+            max-width: 1200px;
         }
 
         .container {
             margin: auto;
-            max-width: 1300px;
+            max-width: 1200px;
             display: grid;
         }
 
@@ -146,8 +147,14 @@
             margin-top: 5%;
 
         }
+        h1{
+            margin-left: 2%;
+        }
 
         @media(max-width: 800px) {
+            html{
+                max-width:700px;
+            }
             .allcontent {
                 display: grid;
                 grid-template-columns: 100%;

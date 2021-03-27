@@ -8,10 +8,12 @@
     <style>
         html {
             background-color: white;
+            max-width: 1200px;
+            margin:auto;
         }
 
         .container {
-            margin: auto;
+            margin:0 auto;
             margin-top: 3%;
             width: 1200px;
             display: grid;
@@ -21,7 +23,7 @@
         }
 
         .allcontent {
-            margin: auto;
+            margin:0 auto;
             max-width: 1200px;
             display: grid;
         }
@@ -50,7 +52,7 @@
             border: none;
             cursor: pointer;
             outline: inherit;
-            margin-left: 2%;
+          
         }
 
        
@@ -73,7 +75,6 @@
         }
 
         .qbtn {
-        
             padding: 5px;
             cursor: pointer;
             margin-left: 2%;
@@ -122,7 +123,8 @@
             display: none !important;
         }
         .box {
-            margin-left: 2%;
+            margin:auto;
+            margin-left:2%;
             text-align: center;
             margin-bottom: 2%;
             box-sizing: border-box;
@@ -141,10 +143,16 @@
         }
 
         @media(max-width: 800px) {
+            html{
+                max-width: 800px;
+            }
+            .headPage{
+                width:98%;
+            }
             .container {
                 max-width: 700px;
                 display: grid;
-                grid-template-columns: 98%;
+                grid-template-columns: 90%;
             }
 
             .allcontent {
@@ -168,20 +176,29 @@
                 width: 20px;
                 margin-top: 50%;
             }
+            .box{
+                margin:auto;
+            }
+            .descriereProdus{
+                padding: 5px;
+            }
         }
 
         @media(max-width: 600px) {
+            html{
+                max-width: 600px;
+            }
             .table {
                 margin: 0;
                 box-shadow: none;
             }
 
             .allcontent {
-                max-width: 500px;
+                max-width: 600px;
             }
 
             .container {
-                max-width: 500px;
+                max-width: 600px;
                 display: grid;
                 grid-template-columns: 98%;
                 margin:0;
@@ -192,7 +209,7 @@
                 font-size: 20px;
             }
             .box{
-                margin:0;
+                margin-left:0;
             }
         }
     </style>
