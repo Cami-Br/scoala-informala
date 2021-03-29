@@ -19,7 +19,8 @@
             vertical-align: middle;
             padding: 6%;
         }
-        h1{
+
+        h1 {
             margin-left: 2%;
         }
 
@@ -200,20 +201,22 @@
             document.querySelector("#poza1").src = produse.poze;
 
         }
-     function nrCart(){
-        let strCart = localStorage.getItem("cos");
+        function nrCart() {
+            let strCart = localStorage.getItem("cos");
             let obj = JSON.parse(strCart);
-            let nr=0;
+            let nr = 0;
             for (let [id, prod] of Object.entries(obj)) {
                 nr += prod.quantity;
             }
             document.querySelector(".nrCart").innerHTML = nr;
         }
-       
+
         function setItem() {
             index = window.location.search.substr(4);
             let nume = document.querySelector("#nume").innerText;
             let price = produse.pret;
+            console.log(produse)
+            let poza = produse.poze;
             let cantitate = document.querySelector("#cantitateDorita").value;
             let numberPrice = Number(price);
             let quantity = Number(cantitate);
@@ -227,16 +230,16 @@
                 if (produs.index === index) {
                     found = true;
                     produs.quantity += quantity;
-                   if(produs.quantity > produse.cantitate){
-                       alert("Out of stock!");
-                       return;
-                   }
+                    if (produs.quantity > produse.cantitate) {
+                        alert("Out of stock!");
+                        return;
+                    }
                     break;
                 }
             }
 
             if (!found) {
-                cos.push({ nume: nume, index: index, pret: price, quantity: quantity });
+                cos.push({ nume: nume, index: index, pret: price, quantity: quantity, poze: poza });
             }
             alert("Adedd to cart!")
             localStorage.setItem("cos", JSON.stringify(cos));

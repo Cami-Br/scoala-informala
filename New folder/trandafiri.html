@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="loadingShop.css">
+    
     <style>
         html {
             background-color: rgb(223, 219, 219);
-            max-width: 1200px;
         }
 
         .container {
             margin: auto;
-            max-width: 1200px;
+            max-width: 1300px;
             display: grid;
         }
 
@@ -30,7 +30,7 @@
         #cosCumparaturi,
         #home {
             float: right;
-            font-size:20px;
+            font-size: 20px;
             margin-top: 1%;
             padding: 5px 10px 5px;
             background: none;
@@ -40,13 +40,13 @@
             outline: inherit;
         }
 
-        #cosCumparaturi {
-            margin-right: 3%;
+        img {
+            margin-top: 10px;
+            width: 200px;
         }
 
-        img {
-            margin-top: 8px;
-            width: 200px;
+        #cosCumparaturi {
+            margin-right: 3%;
         }
 
         p {
@@ -119,7 +119,6 @@
 
         .cart {
             width: 25px;
-            padding-bottom: 10px;
         }
 
         #logo {
@@ -133,7 +132,6 @@
         }
 
         .reclama {
-
             width: 100%;
             text-align: center;
             box-sizing: border-box;
@@ -152,9 +150,6 @@
         }
 
         @media(max-width: 800px) {
-            html{
-                max-width:700px;
-            }
             .allcontent {
                 display: grid;
                 grid-template-columns: 100%;
@@ -163,6 +158,8 @@
             .displa {
                 display: grid;
                 grid-template-columns: 100%;
+                grid-gap: unset;
+                margin: 2%;
             }
 
             h1 {
@@ -218,29 +215,29 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        let produse = [];
-        let url = "https://c-store-8102f-default-rtdb.europe-west1.firebasedatabase.app/";
+        <script>
+            let produse = [];
+            let url = "https://c-store-8102f-default-rtdb.europe-west1.firebasedatabase.app/";
 
-        async function getProduse() {
+            async function getProduse() {
 
-            document.querySelector("#loading").classList.remove("hidden");
-            const response = await fetch(url + ".json");
-            produse = await response.json();
-            document.querySelector("#loading").classList.add("hidden");
-            draw();
-            nrCart();
-        }
-        function draw() {
-            let str = "";
-            for (let [i, prod] of Object.entries(produse)) {
-                let name = prod.nume;
-                if (name.includes("Rose")) {
-                    str += `
+                document.querySelector("#loading").classList.remove("hidden");
+                const response = await fetch(url + ".json");
+                produse = await response.json();
+                document.querySelector("#loading").classList.add("hidden");
+                draw();
+                nrCart();
+            }
+
+            function draw() {
+                let str = "";
+                for (let [i, prod] of Object.entries(produse)) {
+                    let name = prod.nume;
+                    if (name.includes("Rose")) {
+                        str += `
                     <div>
                         <div class="grid-item">
-                           <img src="${prod.poze}" alt="Flowers"/>
+                           <img src="${prod.poze}" alt="Flower"/>
                             <p>${prod.nume}</p>
                             <div class="detalii">
                             <div> ${prod.pret} $</div>
@@ -249,38 +246,34 @@
                         </div>
                     </div>
                  `
+                    }
                 }
+                document.querySelector(".displa").innerHTML = str;
             }
-            document.querySelector(".displa").innerHTML = str;
-        }
-        function nrCart() {
-            let strCart = localStorage.getItem("cos");
-            let obj = JSON.parse(strCart);
-            let nr = 0;
-            for (let [id, prod] of Object.entries(obj)) {
-                nr += prod.quantity;
+            function nrCart() {
+                let strCart = localStorage.getItem("cos");
+                let obj = JSON.parse(strCart);
+                let nr = 0;
+                for (let [id, prod] of Object.entries(obj)) {
+                    nr += prod.quantity;
+                }
+                document.querySelector(".nrCart").innerHTML = nr;
             }
-            document.querySelector(".nrCart").innerHTML = nr;
-        }
-        var myIndex = 0;
-        carousel();
+            var myIndex = 0;
+            carousel();
 
-        function carousel() {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) { myIndex = 1 }
+                x[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 2500);
             }
-            myIndex++;
-            if (myIndex > x.length) { myIndex = 1 }
-            x[myIndex - 1].style.display = "block";
-            setTimeout(carousel, 2500);
-        }
-
-    </script>
-
-
-
+        </script>
 </body>
 
 </html>
