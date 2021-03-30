@@ -11,20 +11,24 @@
     <h1>Agenda</h1>
     <form>
         <label>
-            Nume :
+            Name :
             <input type="text" name="nume" id="numele" />
         </label>
         <label>
-            Telefon :
+            Phone Number :
             <input type="text" name="telefon" id="telefonul" onkeypress="telInput(this, event)" />
         </label>
-        <input class="contactBtn" type="button" value="ADAUGA CONTACT" name="contact" onclick="modificaPasul2();" />
+        <div>
+            <input class="contactBtn" type="button" value="Add contact" name="contact" onclick="modificaPasul2();" />
+            <input type="button" class="hidden modBtn" value="Edit contact" name="modifica"
+                onclick="modificaPasul2();" />
+        </div>
     </form>
     <table class="agenda">
         <thead>
             <tr class="cell">
-                <th>Nume</th>
-                <th>Telefon</th>
+                <th>Name</th>
+                <th>Phone Number</th>
                 <th></th>
                 <th></th>
             </tr>
