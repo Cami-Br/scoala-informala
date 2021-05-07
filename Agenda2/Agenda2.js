@@ -1,4 +1,4 @@
-let url = "https://agenda2-d92ce-default-rtdb.europe-west1.firebasedatabase.app/";
+let url = "https://agenda3-a8376-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacte = {};
 let indexEditare = -1;
 
